@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Terms of Service — Surya Ads</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="legal.css">
+</head>
+<body>
+<div class="page">
+  <div class="shell">
+    <a href="index.html" class="back">&larr; Back to Surya Ads</a>
+    <h1>Terms of Service</h1>
+    <p class="date" id="date"></p>
+
+    <h2>1. Acceptance of Terms</h2>
+    <p>By accessing or using Surya Ads services, you agree to these Terms of Service. If you do not agree, please do not use our services.</p>
+
+    <h2>2. Services</h2>
+    <p>Surya Ads provides digital advertising, marketing, and consultation services. Services may include Google Ads management, social media marketing, WhatsApp marketing campaigns, and related digital strategies.</p>
+
+    <h2>3. Client Responsibilities</h2>
+    <ul>
+      <li>Provide accurate and complete information required for service delivery</li>
+      <li>Timely review and approval of campaign materials</li>
+      <li>Maintain adequate ad spend budgets as agreed</li>
+      <li>Comply with platform advertising policies</li>
+    </ul>
+
+    <h2>4. Payment Terms</h2>
+    <p>Payment terms will be specified in individual service agreements. Late payments may result in service suspension.</p>
+
+    <h2>5. Intellectual Property</h2>
+    <p>All creative materials, strategies, and proprietary tools developed by Surya Ads remain our intellectual property unless otherwise agreed in writing.</p>
+
+    <h2>6. Limitation of Liability</h2>
+    <p>Surya Ads shall not be liable for indirect, incidental, or consequential damages. Our total liability shall not exceed the fees paid for the specific service giving rise to the claim.</p>
+
+    <h2>7. Termination</h2>
+    <p>Either party may terminate services with written notice as specified in the service agreement. Outstanding fees remain payable upon termination.</p>
+
+    <h2>8. Confidentiality</h2>
+    <p>Both parties agree to maintain confidentiality of proprietary business information shared during the course of the engagement.</p>
+
+    <h2>9. Modifications</h2>
+    <p>We reserve the right to modify these terms at any time. Continued use of our services constitutes acceptance of modified terms.</p>
+
+    <h2>10. Contact</h2>
+    <p>For questions about these terms, contact us at <a id="contactEmail" href="mailto:hello@suryaads.com">hello@suryaads.com</a>.</p>
+  </div>
+</div>
+<script src="config.js"></script>
+<script>
+  var C = window.LP_CONFIG || {};
+  var email = C.contactEmail || 'hello@suryaads.com';
+  document.getElementById('contactEmail').textContent = email;
+  document.getElementById('contactEmail').href = 'mailto:' + email;
+  document.getElementById('date').textContent = 'Last updated: ' + (C.legalUpdated || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }));
+</script>
+</body>
+</html>
