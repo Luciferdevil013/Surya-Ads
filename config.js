@@ -34,7 +34,7 @@ window.LP_CONFIG = {
 
   // Send the visitor to WhatsApp automatically, without them tapping.
   // Set to false if you want a pure click-through page (safer for ad review).
-  autoRedirect: true,
+  autoRedirect: false,
 
   // How long the landing page is visible before the auto-redirect fires (ms).
   // 2500 = 2.5 seconds. Keep this >= 1200 so the page is genuinely seen —
@@ -47,7 +47,7 @@ window.LP_CONFIG = {
   /* ============ TRACKING ============ */
 
   // Meta (Facebook) Pixel ID — leave "" to disable.
-  metaPixelId: "",
+  metaPixelId: "1009421638807007",
 
   // Standard event fired when the visitor is sent to WhatsApp.
   // Common choices: "Lead", "Contact", "InitiateCheckout".
