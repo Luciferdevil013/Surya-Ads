@@ -1,6 +1,7 @@
 /* ------------------------------------------------------------------
    WhatsApp Landing Page — runtime
-   Builds the WhatsApp link, fires tracking, performs the redirect.
+   Builds the WhatsApp link, fires tracking, renders the page from
+   config.js and performs the (optional) redirect.
    Edit config.js, not this file.
    ------------------------------------------------------------------ */
 (function () {
@@ -136,22 +137,52 @@
 
   /* ---------------- render ---------------- */
 
+  function all(selector) { return Array.prototype.slice.call(document.querySelectorAll(selector)); }
+
+  // Like setText, but words wrapped in *asterisks* get the highlight style:
+  // "Ads that bring *real customers*" -> Ads that bring <span.accent>real customers</span>
+  function setRich(id, value) {
+    var node = el(id);
+    if (!node || value == null) return;
+    node.textContent = '';
+    String(value).split('*').forEach(function (part, i) {
+      if (!part) return;
+      if (i % 2) {
+        var span = document.createElement('span');
+        span.className = 'accent';
+        span.textContent = part;
+        node.appendChild(span);
+      } else {
+        node.appendChild(document.createTextNode(part));
+      }
+    });
+  }
+
   function render() {
     var brand = C.brandName || 'Your Business';
     var initial = (brand.trim()[0] || 'B').toUpperCase();
 
-    renderBrandName(brand);
+    renderBrandName('brandName', brand);
+    renderBrandName('footerBrandName', brand);
     setText('footerBrand', brand);
     setText('brandMark', initial);
+    setText('footerMark', initial);
     setText('footerTagline', C.tagline);
     setText('onlineLabel', C.onlineLabel);
     setText('badge', C.badge);
-    setText('headline', C.headline);
+    setRich('headline', C.headline);
     setText('subheadline', C.subheadline);
-    setText('buttonLabel', C.buttonLabel);
     setText('note', C.reassurance);
+    setText('closingNote', C.reassurance);
     setText('fallback', C.fallbackText);
     setText('footerNote', C.footerNote);
+    setRich('closingTitle', C.closingTitle);
+    setText('closingText', C.closingText);
+
+    (C.heroChips || []).forEach(function (text, i) {
+      var chip = document.querySelector('[data-chip="' + i + '"]');
+      if (chip) chip.textContent = text;
+    });
 
     if (C.pageTitle) {
       document.title = C.pageTitle;
@@ -172,34 +203,35 @@
 
     el('footerYear').textContent = new Date().getFullYear();
 
-    // Logo — the header uses the square mark, the footer the full lockup.
-    // If either image is missing, fall back to the gradient letter mark.
-    [[el('brandLogo'), C.logoMark || C.logo, ''],
-     [el('footerLogo'), C.logo, brand]].forEach(function (pair) {
-      var img = pair[0], src = pair[1];
+    // Logo mark in the header and footer. If the image is missing or not
+    // configured, fall back to the gradient letter mark.
+    var mark = C.logoMark || C.logo;
+    [el('brandLogo'), el('footerLogo')].forEach(function (img) {
       if (!img) return;
-      if (!src) {
+      if (!mark) {
         document.body.classList.add('no-logo');
         img.remove();
         return;
       }
-      img.setAttribute('src', src);
-      img.setAttribute('alt', pair[2]);
       img.addEventListener('error', function () {
         document.body.classList.add('no-logo');
         img.remove();
       });
+      img.setAttribute('src', mark);
     });
 
-    // CTA — hero button and the closing button share the same link and tracking
-    var ctas = [el('cta'), el('ctaAlt')].filter(Boolean);
-    setText('ctaAltLabel', C.buttonLabel);
+    // Every WhatsApp button on the page shares the same link and tracking.
+    all('[data-label]').forEach(function (n) { if (C.buttonLabel) n.textContent = C.buttonLabel; });
+    all('[data-sub]').forEach(function (n) {
+      if (C.buttonSub == null) return;
+      if (C.buttonSub) n.textContent = C.buttonSub;
+      else n.remove();
+    });
 
-    ctas.forEach(function (cta) {
+    all('[data-wa]').forEach(function (cta) {
       if (waLink) {
         cta.setAttribute('href', waLink);
         cta.setAttribute('target', isDesktop() ? '_blank' : '_self');
-        cta.setAttribute('aria-label', (C.buttonLabel || 'Chat on WhatsApp') + ' — opens WhatsApp');
       } else {
         cta.setAttribute('href', '#');
         cta.setAttribute('aria-disabled', 'true');
@@ -236,9 +268,11 @@
     }
 
     renderContent();
+    initReveal();
+    initSticky();
   }
 
-  /* ---------------- RankReview information sections ---------------- */
+  /* ---------------- information sections ---------------- */
 
   // Icon paths for the services grid, drawn with a 24x24 stroked viewBox.
   var ICONS = {
@@ -266,54 +300,67 @@
 
   function show(id) { var n = el(id); if (n) n.hidden = false; }
 
-  // Renders the wordmark, gradient-tinting the second half of a CamelCase
-  // name ("RankReview" -> Rank + Review) the way the logo does.
-  function renderBrandName(brand) {
-    var node = el('brandName');
+  // Renders the wordmark with the last word gradient-tinted, the way the logo
+  // does: "Surya Sports Media" -> Surya Sports <Media>, "RankReview" -> Rank<Review>.
+  function renderBrandName(id, brand) {
+    var node = el(id);
     if (!node) return;
 
     node.textContent = '';
 
-    var split = /^([A-Z][a-z]+)([A-Z][A-Za-z]*)$/.exec(brand.replace(/\s+/g, ''));
+    var split = /^(.*\S)(\s+)(\S+)$/.exec(brand.trim()) ||
+                /^([A-Z][a-z]+)()([A-Z][A-Za-z]*)$/.exec(brand.trim());
     if (!split) { node.textContent = brand; return; }
 
-    node.appendChild(document.createTextNode(split[1]));
+    node.appendChild(document.createTextNode(split[1] + split[2]));
     var tail = document.createElement('span');
     tail.className = 'rev';
-    tail.textContent = split[2];
+    tail.textContent = split[3];
     node.appendChild(tail);
   }
 
-  function renderContent() {
-    // About
-    if (C.aboutText) {
-      setText('aboutTitle', C.aboutTitle);
-      setText('aboutText', C.aboutText);
-      show('aboutSection');
-    }
+  function fillList(id, items) {
+    var list = el(id);
+    items.forEach(function (text) {
+      var li = document.createElement('li');
+      li.textContent = text;
+      list.appendChild(li);
+    });
+  }
 
-    // Problems
+  function renderContent() {
+    renderClients();
+
+    // Problems vs benefits
     var problems = C.problems || [];
-    if (problems.length) {
+    var benefits = C.benefits || [];
+    if (problems.length || benefits.length) {
+      setRich('compareTitle', C.compareTitle);
       setText('problemsTitle', C.problemsTitle);
-      var pl = el('problemsList');
-      problems.forEach(function (text) {
-        var li = document.createElement('li');
-        li.textContent = text;
-        pl.appendChild(li);
-      });
-      show('problemsSection');
+      setText('benefitsTitle', C.benefitsTitle);
+      fillList('problemsList', problems);
+      fillList('benefitsList', benefits);
+      if (!problems.length) el('problemsCard').hidden = true;
+      if (!benefits.length) el('benefitsCard').hidden = true;
+      if (!problems.length || !benefits.length) el('compare').classList.add('is-single');
+      show('compareSection');
     }
 
     // Services
     var services = C.services || [];
     if (services.length) {
-      setText('servicesTitle', C.servicesTitle);
+      setRich('servicesTitle', C.servicesTitle);
+      setText('aboutText', C.aboutText);
       setText('servicesNote', C.servicesNote);
+      if (!C.aboutText) el('aboutText').hidden = true;
+      if (!C.servicesNote) el('servicesNote').hidden = true;
+
       var grid = el('servicesGrid');
-      services.forEach(function (s) {
-        var card = document.createElement('div');
-        card.className = 'svc';
+      services.forEach(function (s, i) {
+        var card = document.createElement('article');
+        card.className = 'svc' + (s.featured ? ' svc-featured' : '');
+        card.setAttribute('data-reveal', '');
+        card.style.setProperty('--d', (i % 4) * 0.07 + 's');
 
         var icon = document.createElement('div');
         icon.className = 'svc-icon';
@@ -336,48 +383,36 @@
     // How it works
     var steps = C.steps || [];
     if (steps.length) {
-      setText('stepsTitle', C.stepsTitle);
+      setRich('stepsTitle', C.stepsTitle);
       var sl = el('stepsList');
       steps.forEach(function (s, i) {
-        var row = document.createElement('div');
-        row.className = 'step';
+        var li = document.createElement('li');
+        li.className = 'step';
+        li.setAttribute('data-reveal', '');
+        li.style.setProperty('--d', i * 0.1 + 's');
 
-        var num = document.createElement('div');
+        var num = document.createElement('span');
         num.className = 'step-num';
-        num.textContent = String(i + 1);
+        num.setAttribute('aria-hidden', 'true');
+        num.textContent = (i < 9 ? '0' : '') + (i + 1);
 
-        var body = document.createElement('div');
         var h3 = document.createElement('h3');
         h3.textContent = s.title;
         var p = document.createElement('p');
         p.textContent = s.text;
-        body.appendChild(h3);
-        body.appendChild(p);
 
-        row.appendChild(num);
-        row.appendChild(body);
-        sl.appendChild(row);
+        li.appendChild(num);
+        li.appendChild(h3);
+        li.appendChild(p);
+        sl.appendChild(li);
       });
       show('stepsSection');
-    }
-
-    // Benefits
-    var benefits = C.benefits || [];
-    if (benefits.length) {
-      setText('benefitsTitle', C.benefitsTitle);
-      var bl = el('benefitsList');
-      benefits.forEach(function (text) {
-        var li = document.createElement('li');
-        li.textContent = text;
-        bl.appendChild(li);
-      });
-      show('benefitsSection');
     }
 
     // Industries
     var industries = C.industries || [];
     if (industries.length) {
-      setText('industriesTitle', C.industriesTitle);
+      setRich('industriesTitle', C.industriesTitle);
       var il = el('industriesList');
       industries.forEach(function (text) {
         var chip = document.createElement('span');
@@ -391,10 +426,12 @@
     // FAQ
     var faqs = C.faqs || [];
     if (faqs.length) {
-      setText('faqTitle', C.faqTitle);
+      setRich('faqTitle', C.faqTitle);
       var fl = el('faqList');
       faqs.forEach(function (f) {
         var d = document.createElement('details');
+        d.setAttribute('name', 'faq');
+        d.setAttribute('data-reveal', '');
         var s = document.createElement('summary');
         s.textContent = f.q;
         var p = document.createElement('p');
@@ -407,6 +444,175 @@
     }
 
     renderContact();
+  }
+
+  /* ---------------- clients ---------------- */
+
+  var PHOTO_EXTS = ['.jpg', '.jpeg', '.png', '.webp'];
+  var photoCache = {};
+
+  // Finds a client photo. If the exact file is missing it also tries the other
+  // common extensions, so "malik-mumbai.png" works even when config.js says
+  // ".jpg". Calls done(url) with the first file that loads, or done(null) when
+  // none do — the card then keeps showing the initials.
+  function resolvePhoto(src, done) {
+    var entry = photoCache[src];
+    if (entry) {
+      if (entry.settled) done(entry.url); else entry.waiters.push(done);
+      return;
+    }
+    entry = photoCache[src] = { settled: false, url: null, waiters: [done] };
+
+    var base = src.replace(/\.(jpe?g|png|webp)$/i, '');
+    var tries = [src].concat(PHOTO_EXTS.map(function (ext) { return base + ext; }))
+      .filter(function (s, i, list) { return list.indexOf(s) === i; });
+
+    function settle(url) {
+      entry.settled = true;
+      entry.url = url;
+      entry.waiters.forEach(function (fn) { fn(url); });
+      entry.waiters = [];
+    }
+
+    (function attempt(i) {
+      if (i >= tries.length) { settle(null); return; }
+      var probe = new Image();
+      probe.onload = function () { settle(tries[i]); };
+      probe.onerror = function () { attempt(i + 1); };
+      probe.src = tries[i];
+    })(0);
+  }
+
+  function initials(name) {
+    return String(name || '').trim().split(/\s+/).slice(0, 2)
+      .map(function (w) { return w.charAt(0); }).join('').toUpperCase();
+  }
+
+  // Lays the client's photo over the initials placeholder once it has loaded.
+  function addPhoto(box, client, alt) {
+    if (!client.photo) return;
+    resolvePhoto(client.photo, function (url) {
+      if (!url) return;
+      var img = document.createElement('img');
+      img.alt = alt;
+      img.decoding = 'async';
+      if (client.position) img.style.objectPosition = client.position;
+      img.src = url;
+      box.appendChild(img);
+    });
+  }
+
+  function avatar(client) {
+    var a = document.createElement('span');
+    a.className = 'avatar';
+    a.textContent = initials(client.name);
+    addPhoto(a, client, '');
+    return a;
+  }
+
+  function renderClients() {
+    var clients = (C.clients || []).filter(function (c) { return c && c.name; });
+    if (!clients.length) return;
+
+    setRich('clientsTitle', C.clientsTitle);
+    setText('clientsNote', C.clientsNote);
+    setText('clientsCtaLabel', C.clientsCtaLabel);
+    if (!C.clientsNote) el('clientsNote').hidden = true;
+
+    var grid = el('clientGrid');
+    clients.forEach(function (c, i) {
+      var item = document.createElement('div');
+      item.className = 'client-item';
+      item.setAttribute('data-reveal', '');
+      item.style.setProperty('--d', (i % 4) * 0.09 + 's');
+
+      var card = document.createElement('article');
+      card.className = 'client-card';
+
+      var media = document.createElement('div');
+      media.className = 'client-media';
+
+      var ini = document.createElement('span');
+      ini.className = 'client-initials';
+      ini.setAttribute('aria-hidden', 'true');
+      ini.textContent = initials(c.name);
+      media.appendChild(ini);
+
+      if (C.clientBadge) {
+        var badge = document.createElement('span');
+        badge.className = 'client-badge';
+        badge.textContent = C.clientBadge;
+        media.appendChild(badge);
+      }
+
+      var meta = document.createElement('div');
+      meta.className = 'client-meta';
+
+      var name = document.createElement('h3');
+      name.className = 'client-name';
+      name.textContent = c.name;
+      meta.appendChild(name);
+
+      if (c.place) {
+        var place = document.createElement('p');
+        place.className = 'client-place';
+        place.textContent = c.place;
+        meta.appendChild(place);
+      }
+
+      var work = (c.work || []).filter(Boolean);
+      if (work.length) {
+        var tags = document.createElement('div');
+        tags.className = 'client-tags';
+        work.forEach(function (w) {
+          var t = document.createElement('span');
+          t.textContent = w;
+          tags.appendChild(t);
+        });
+        meta.appendChild(tags);
+      }
+
+      media.appendChild(meta);
+      addPhoto(media, c, 'Photo of ' + c.name);
+      card.appendChild(media);
+
+      if (c.quote) {
+        var q = document.createElement('blockquote');
+        q.className = 'client-quote';
+        q.textContent = '“' + c.quote + '”';
+        card.appendChild(q);
+      }
+
+      item.appendChild(card);
+      grid.appendChild(item);
+    });
+
+    // Avatars + "Trusted by ..." under the hero button and in the closing card
+    var shown = clients.slice(0, 4);
+    [el('heroAvatars'), el('closingAvatars')].forEach(function (box) {
+      if (!box) return;
+      shown.forEach(function (c) { box.appendChild(avatar(c)); });
+      box.hidden = false;
+    });
+
+    var text = el('heroProofText');
+    if (text) {
+      var names = clients.map(function (c) { return c.name; });
+      var extra = 0;
+      if (names.length > 3) { extra = names.length - 2; names = names.slice(0, 2); }
+
+      text.textContent = (C.proofPrefix || 'Trusted by') + ' ';
+      names.forEach(function (n, i) {
+        if (i > 0) text.appendChild(document.createTextNode(i === names.length - 1 && !extra ? ' & ' : ', '));
+        var b = document.createElement('strong');
+        b.textContent = n;
+        text.appendChild(b);
+      });
+      if (extra) text.appendChild(document.createTextNode(' & ' + extra + ' more'));
+      show('heroProof');
+    }
+
+    show('clientsSection');
   }
 
   function renderContact() {
@@ -444,16 +650,19 @@
 
     if (!rows.length) { el('contactSection').hidden = true; return; }
 
-    rows.forEach(function (r) {
+    rows.forEach(function (r, i) {
       var a = document.createElement('a');
-      a.className = 'contact-row';
+      a.className = 'contact-row' + (r.isCta ? ' is-wa' : '');
       a.setAttribute('href', r.href);
+      a.setAttribute('data-reveal', '');
+      a.style.setProperty('--d', i * 0.08 + 's');
       if (r.external) {
         a.setAttribute('target', '_blank');
         a.setAttribute('rel', 'noopener');
       }
       if (r.isCta) {
         a.setAttribute('rel', 'noopener nofollow');
+        a.setAttribute('target', isDesktop() ? '_blank' : '_self');
         a.addEventListener('click', function () { goToWhatsApp(true); });
       }
 
@@ -464,8 +673,11 @@
       var body = document.createElement('span');
       var strong = document.createElement('strong');
       strong.textContent = r.label;
+      var value = document.createElement('span');
+      value.className = 'contact-value';
+      value.textContent = r.value;
       body.appendChild(strong);
-      body.appendChild(document.createTextNode(r.value));
+      body.appendChild(value);
 
       a.appendChild(icon);
       a.appendChild(body);
@@ -481,6 +693,57 @@
       document.head.appendChild(tag);
     }
     tag.setAttribute('content', value);
+  }
+
+  /* ---------------- motion ---------------- */
+
+  // Fades blocks in as they scroll into view. Only blocks that start below the
+  // fold are hidden, so nothing visible on load ever blinks, and if this script
+  // fails the whole page simply stays visible.
+  function initReveal() {
+    if (!('IntersectionObserver' in window)) return;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+
+    var fold = window.innerHeight || document.documentElement.clientHeight;
+    all('[data-reveal]').forEach(function (n) {
+      if (n.closest('[hidden]')) return;
+      if (n.getBoundingClientRect().top < fold) return;
+      n.classList.add('reveal');
+      io.observe(n);
+    });
+  }
+
+  // Shows the sticky WhatsApp button once the hero button has scrolled away,
+  // and tucks it away again while the closing call-to-action is on screen.
+  function initSticky() {
+    var bar = el('stickyCta');
+    var hero = el('cta');
+    var closing = el('ctaAlt');
+    if (!bar || !hero || !waLink || !('IntersectionObserver' in window)) return;
+
+    var heroGone = false;
+    var closingVisible = false;
+
+    function update() { bar.classList.toggle('is-visible', heroGone && !closingVisible); }
+
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { heroGone = !e.isIntersecting && e.boundingClientRect.top < 0; });
+      update();
+    }).observe(hero);
+
+    if (closing) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { closingVisible = e.isIntersecting; });
+        update();
+      }).observe(closing);
+    }
   }
 
   /* ---------------- boot ---------------- */
