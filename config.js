@@ -221,5 +221,5 @@ window.LP_CONFIG = {
   pageTitle: "Surya Sports Media — Ads That Bring Real Customers | Chat on WhatsApp",
   pageDescription: "Surya Sports Media provides AI-powered digital marketing solutions. Google Ads, Social Media, WhatsApp Marketing. Message us on WhatsApp for a free consultation.",
   // Absolute URL of a 1200x630 preview image, or "" for none.
-  shareImage: "assets/og-image.png"
+  shareImage: "assets/og-image.png?v=2"
 };
