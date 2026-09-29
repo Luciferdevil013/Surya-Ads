@@ -50,7 +50,7 @@ window.LP_CONFIG = {
   // <head> of index.html (Meta's domain check looks for it there) — if you
   // change pixels, update the ID in both places. Leave "" to stop the
   // WhatsApp-click event.
-  metaPixelId: "1093788946357867",
+  metaPixelId: "4029597787337053",
 
   // Standard event fired when the visitor is sent to WhatsApp.
   // Common choices: "Lead", "Contact", "InitiateCheckout".
