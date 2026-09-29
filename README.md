@@ -1,14 +1,14 @@
-# Surya Sports Media — WhatsApp Landing Page
+# Surya Sports Media — Telegram Landing Page
 
-A high-converting WhatsApp landing page for Surya Sports Media digital advertising services.
+A high-converting Telegram landing page for Surya Sports Media digital advertising services.
 
 ## Features
 
-- **WhatsApp Integration** — Auto-redirect to WhatsApp with pre-filled message
+- **Telegram Integration** — Opens a direct Telegram chat with @suryasportsmedia, message pre-filled
 - **Mobile-First Design** — Optimized for all devices
 - **Sunrise Design** — Dark hero with a rising sun and orbiting ad-platform icons
 - **Client Showcase** — Photo cards of clients you've worked with, plus "Trusted by" avatars
-- **Sticky WhatsApp Button** — Appears once the main button scrolls away
+- **Sticky Telegram Button** — Appears once the main button scrolls away
 - **Configurable** — Edit only `config.js` to customize everything
 - **SEO Optimized** — Meta tags, Open Graph, and structured content
 - **Tracking Ready** — Meta Pixel and GA4 integration
@@ -16,7 +16,7 @@ A high-converting WhatsApp landing page for Surya Sports Media digital advertisi
 
 ## Quick Setup
 
-1. Edit `config.js` with your WhatsApp number and business details
+1. Edit `config.js` with your Telegram username and business details
 2. Add client photos to `assets/clients/` (see below)
 3. Open `index.html` in a browser to test (add `?noredirect=1` while testing)
 
@@ -36,9 +36,9 @@ photos without consent.
 
 All settings are in `config.js`:
 
-- `whatsappNumbers` — Your WhatsApp business number(s)
-- `prefillMessage` — Message pre-filled in WhatsApp
-- `autoRedirect` — Automatically redirect to WhatsApp
+- `telegramUsername` — Telegram username the buttons open (currently `suryasportsmedia`)
+- `prefillMessage` — Message pre-filled in Telegram
+- `autoRedirect` — Automatically redirect to Telegram
 - `metaPixelId` — Facebook Pixel ID for tracking
 - `ga4Id` — Google Analytics 4 measurement ID
 
@@ -63,9 +63,9 @@ Surya-Ads/
     └── clients/        # Client photos
 ```
 
-## WhatsApp URL Parameters
+## Telegram URL Parameters
 
-- `?n=919999999999` — Override phone number
+- `?u=someusername` — Override Telegram username
 - `?m=Hello` — Override pre-filled message
 - `?ref=campaign_name` — Campaign tracking
 - `?noredirect=1` — Disable auto-redirect (for ad review)

@@ -1,6 +1,6 @@
 /* ------------------------------------------------------------------
-   WhatsApp Landing Page — runtime
-   Builds the WhatsApp link, fires tracking, renders the page from
+   Telegram Landing Page — runtime
+   Builds the Telegram link, fires tracking, renders the page from
    config.js and performs the (optional) redirect.
    Edit config.js, not this file.
    ------------------------------------------------------------------ */
@@ -15,32 +15,11 @@
   function param(name) { return C.allowUrlOverrides ? (params.get(name) || '') : ''; }
   function setText(id, value) { var n = el(id); if (n && value != null) n.textContent = value; }
 
-  /* ---------------- number selection ---------------- */
+  /* ---------------- username ---------------- */
 
-  var numbers = (C.whatsappNumbers || []).map(digitsOnly).filter(Boolean);
+  function cleanUsername(s) { return String(s == null ? '' : s).trim().replace(/^@/, '').replace(/[^A-Za-z0-9_]/g, ''); }
 
-  function pickNumber() {
-    var override = digitsOnly(param('n') || param('number'));
-    if (override) return override;
-    if (!numbers.length) return '';
-    if (numbers.length === 1) return numbers[0];
-
-    var mode = C.rotation || 'random';
-    if (mode === 'off') return numbers[0];
-
-    if (mode === 'sequential') {
-      try {
-        var key = 'lp_rotation_index';
-        var i = parseInt(window.localStorage.getItem(key) || '0', 10);
-        if (isNaN(i) || i < 0) i = 0;
-        window.localStorage.setItem(key, String((i + 1) % numbers.length));
-        return numbers[i % numbers.length];
-      } catch (e) { /* storage blocked — fall through to random */ }
-    }
-    return numbers[Math.floor(Math.random() * numbers.length)];
-  }
-
-  var phone = pickNumber();
+  var username = cleanUsername(param('u') || param('user') || C.telegramUsername);
 
   /* ---------------- message ---------------- */
 
@@ -65,16 +44,14 @@
       .test(navigator.userAgent || '');
   }
 
+  // t.me/<username>?text=... opens a direct chat with the message pre-typed.
   function buildLink() {
-    if (!phone) return '';
+    if (!username) return '';
     var text = message ? encodeURIComponent(message) : '';
-    if (C.desktopUsesWebWhatsApp && isDesktop()) {
-      return 'https://web.whatsapp.com/send?phone=' + phone + (text ? '&text=' + text : '');
-    }
-    return 'https://wa.me/' + phone + (text ? '?text=' + text : '');
+    return 'https://t.me/' + username + (text ? '?text=' + text : '');
   }
 
-  var waLink = buildLink();
+  var chatLink = buildLink();
 
   /* ---------------- tracking ---------------- */
 
@@ -87,17 +64,17 @@
     try {
       if (window.fbq && C.metaPixelId && C.pixelClickEvent) {
         window.fbq('track', C.pixelClickEvent, {
-          content_name: C.brandName || 'WhatsApp lead',
-          content_category: 'whatsapp_redirect'
+          content_name: C.brandName || 'Telegram lead',
+          content_category: 'telegram_redirect'
         });
       }
     } catch (e) { /* never block the redirect on a tracking error */ }
 
     try {
       if (window.gtag) {
-        window.gtag('event', 'whatsapp_click', {
+        window.gtag('event', 'telegram_click', {
           event_category: 'engagement',
-          event_label: phone
+          event_label: username
         });
       }
     } catch (e) { /* no-op */ }
@@ -112,14 +89,14 @@
     if (f) f.classList.add('is-visible');
   }
 
-  function goToWhatsApp(viaClick) {
-    if (!waLink) return;
+  function goToTelegram(viaClick) {
+    if (!chatLink) return;
 
     fireTracking();
 
     var note = el('note');
     if (note) {
-      note.textContent = C.redirectingText || 'Opening WhatsApp…';
+      note.textContent = C.redirectingText || 'Opening Telegram…';
       note.classList.add('is-active');
     }
 
@@ -131,7 +108,7 @@
     if (viaClick) return;
 
     setTimeout(function () {
-      window.location.href = waLink;
+      window.location.href = chatLink;
     }, Math.max(0, C.trackingFlushMs == null ? 300 : C.trackingFlushMs));
   }
 
@@ -220,7 +197,7 @@
       img.setAttribute('src', mark);
     });
 
-    // Every WhatsApp button on the page shares the same link and tracking.
+    // Every Telegram button on the page shares the same link and tracking.
     all('[data-label]').forEach(function (n) { if (C.buttonLabel) n.textContent = C.buttonLabel; });
     all('[data-sub]').forEach(function (n) {
       if (C.buttonSub == null) return;
@@ -228,9 +205,9 @@
       else n.remove();
     });
 
-    all('[data-wa]').forEach(function (cta) {
-      if (waLink) {
-        cta.setAttribute('href', waLink);
+    all('[data-tg]').forEach(function (cta) {
+      if (chatLink) {
+        cta.setAttribute('href', chatLink);
         cta.setAttribute('target', isDesktop() ? '_blank' : '_self');
       } else {
         cta.setAttribute('href', '#');
@@ -238,14 +215,14 @@
       }
 
       cta.addEventListener('click', function (e) {
-        if (!waLink) { e.preventDefault(); return; }
-        goToWhatsApp(true);
+        if (!chatLink) { e.preventDefault(); return; }
+        goToTelegram(true);
       });
     });
 
-    if (!waLink) {
-      setText('note', 'Setup needed: add your WhatsApp number in config.js');
-      console.warn('[landing] No WhatsApp number configured — set whatsappNumbers in config.js');
+    if (!chatLink) {
+      setText('note', 'Setup needed: add your Telegram username in config.js');
+      console.warn('[landing] No Telegram username configured — set telegramUsername in config.js');
     }
 
     // Trust row
@@ -621,12 +598,12 @@
 
     var rows = [];
 
-    if (waLink) {
+    if (chatLink) {
       rows.push({
         icon: 'chat',
-        label: 'WhatsApp',
-        value: 'Message us — fastest reply',
-        href: waLink,
+        label: 'Telegram',
+        value: '@' + username + ' — fastest reply',
+        href: chatLink,
         isCta: true
       });
     }
@@ -652,7 +629,7 @@
 
     rows.forEach(function (r, i) {
       var a = document.createElement('a');
-      a.className = 'contact-row' + (r.isCta ? ' is-wa' : '');
+      a.className = 'contact-row' + (r.isCta ? ' is-tg' : '');
       a.setAttribute('href', r.href);
       a.setAttribute('data-reveal', '');
       a.style.setProperty('--d', i * 0.08 + 's');
@@ -663,7 +640,7 @@
       if (r.isCta) {
         a.setAttribute('rel', 'noopener nofollow');
         a.setAttribute('target', isDesktop() ? '_blank' : '_self');
-        a.addEventListener('click', function () { goToWhatsApp(true); });
+        a.addEventListener('click', function () { goToTelegram(true); });
       }
 
       var icon = document.createElement('span');
@@ -720,13 +697,13 @@
     });
   }
 
-  // Shows the sticky WhatsApp button once the hero button has scrolled away,
+  // Shows the sticky Telegram button once the hero button has scrolled away,
   // and tucks it away again while the closing call-to-action is on screen.
   function initSticky() {
     var bar = el('stickyCta');
     var hero = el('cta');
     var closing = el('ctaAlt');
-    if (!bar || !hero || !waLink || !('IntersectionObserver' in window)) return;
+    if (!bar || !hero || !chatLink || !('IntersectionObserver' in window)) return;
 
     var heroGone = false;
     var closingVisible = false;
@@ -752,12 +729,12 @@
 
   var redirectDisabled = params.get('noredirect') === '1' || params.get('preview') === '1';
 
-  if (C.autoRedirect && waLink && !redirectDisabled) {
-    setTimeout(function () { goToWhatsApp(false); },
+  if (C.autoRedirect && chatLink && !redirectDisabled) {
+    setTimeout(function () { goToTelegram(false); },
       Math.max(0, C.redirectDelayMs == null ? 1800 : C.redirectDelayMs));
   }
 
-  // If the visitor comes back (WhatsApp opened, then they hit back), reset the
+  // If the visitor comes back (Telegram opened, then they hit back), reset the
   // page instead of instantly bouncing them out again.
   window.addEventListener('pageshow', function (e) {
     if (!e.persisted) return;
