@@ -1,6 +1,6 @@
 /* ------------------------------------------------------------------
-   Telegram Landing Page — runtime
-   Builds the Telegram link, fires tracking, renders the page from
+   Telegram + WhatsApp Landing Page — runtime
+   Builds the Telegram and WhatsApp links, fires tracking, renders the page from
    config.js and performs the (optional) redirect.
    Edit config.js, not this file.
    ------------------------------------------------------------------ */
@@ -20,6 +20,10 @@
   function cleanUsername(s) { return String(s == null ? '' : s).trim().replace(/^@/, '').replace(/[^A-Za-z0-9_]/g, ''); }
 
   var username = cleanUsername(param('u') || param('user') || C.telegramUsername);
+
+  /* ---------------- whatsapp number ---------------- */
+
+  var phone = digitsOnly(param('n') || param('number') || C.whatsappNumber);
 
   /* ---------------- message ---------------- */
 
@@ -44,37 +48,41 @@
       .test(navigator.userAgent || '');
   }
 
-  // t.me/<username>?text=... opens a direct chat with the message pre-typed.
-  function buildLink() {
-    if (!username) return '';
-    var text = message ? encodeURIComponent(message) : '';
-    return 'https://t.me/' + username + (text ? '?text=' + text : '');
-  }
+  var text = message ? encodeURIComponent(message) : '';
 
-  var chatLink = buildLink();
+  // t.me/<username>?text=... opens a direct chat with the message pre-typed.
+  var tgLink = username ? 'https://t.me/' + username + (text ? '?text=' + text : '') : '';
+
+  // wa.me/<number>?text=... does the same on WhatsApp.
+  var waLink = phone ? 'https://wa.me/' + phone + (text ? '?text=' + text : '') : '';
+
+  var CHANNELS = {
+    tg: { name: 'Telegram', link: tgLink, event: 'telegram_click', category: 'telegram_redirect', id: username },
+    wa: { name: 'WhatsApp', link: waLink, event: 'whatsapp_click', category: 'whatsapp_redirect', id: phone }
+  };
 
   /* ---------------- tracking ---------------- */
 
-  var tracked = false;
+  var tracked = {};
 
-  function fireTracking() {
-    if (tracked) return;
-    tracked = true;
+  function fireTracking(ch) {
+    if (tracked[ch.event]) return;
+    tracked[ch.event] = true;
 
     try {
       if (window.fbq && C.metaPixelId && C.pixelClickEvent) {
         window.fbq('track', C.pixelClickEvent, {
-          content_name: C.brandName || 'Telegram lead',
-          content_category: 'telegram_redirect'
+          content_name: C.brandName || ch.name + ' lead',
+          content_category: ch.category
         });
       }
     } catch (e) { /* never block the redirect on a tracking error */ }
 
     try {
       if (window.gtag) {
-        window.gtag('event', 'telegram_click', {
+        window.gtag('event', ch.event, {
           event_category: 'engagement',
-          event_label: username
+          event_label: ch.id
         });
       }
     } catch (e) { /* no-op */ }
@@ -89,14 +97,15 @@
     if (f) f.classList.add('is-visible');
   }
 
-  function goToTelegram(viaClick) {
-    if (!chatLink) return;
+  function goToChat(key, viaClick) {
+    var ch = CHANNELS[key];
+    if (!ch || !ch.link) return;
 
-    fireTracking();
+    fireTracking(ch);
 
     var note = el('note');
     if (note) {
-      note.textContent = C.redirectingText || 'Opening Telegram…';
+      note.textContent = (C.redirectingText || 'Opening {app}…').replace('{app}', ch.name);
       note.classList.add('is-active');
     }
 
@@ -108,7 +117,7 @@
     if (viaClick) return;
 
     setTimeout(function () {
-      window.location.href = chatLink;
+      window.location.href = ch.link;
     }, Math.max(0, C.trackingFlushMs == null ? 300 : C.trackingFlushMs));
   }
 
@@ -197,32 +206,33 @@
       img.setAttribute('src', mark);
     });
 
-    // Every Telegram button on the page shares the same link and tracking.
-    all('[data-label]').forEach(function (n) { if (C.buttonLabel) n.textContent = C.buttonLabel; });
+    // Every Telegram button shares one link and tracking, and so does every
+    // WhatsApp button. data-label="tg|wa" picks which configured label to use.
+    var labels = { tg: C.buttonLabel, wa: C.whatsappButtonLabel };
+    all('[data-label]').forEach(function (n) {
+      var label = labels[n.getAttribute('data-label')];
+      if (label) n.textContent = label;
+    });
     all('[data-sub]').forEach(function (n) {
       if (C.buttonSub == null) return;
       if (C.buttonSub) n.textContent = C.buttonSub;
       else n.remove();
     });
 
-    all('[data-tg]').forEach(function (cta) {
-      if (chatLink) {
-        cta.setAttribute('href', chatLink);
+    // A channel with nothing configured has its buttons removed entirely.
+    Object.keys(CHANNELS).forEach(function (key) {
+      var link = CHANNELS[key].link;
+      all('[data-' + key + ']').forEach(function (cta) {
+        if (!link) { cta.remove(); return; }
+        cta.setAttribute('href', link);
         cta.setAttribute('target', isDesktop() ? '_blank' : '_self');
-      } else {
-        cta.setAttribute('href', '#');
-        cta.setAttribute('aria-disabled', 'true');
-      }
-
-      cta.addEventListener('click', function (e) {
-        if (!chatLink) { e.preventDefault(); return; }
-        goToTelegram(true);
+        cta.addEventListener('click', function () { goToChat(key, true); });
       });
     });
 
-    if (!chatLink) {
-      setText('note', 'Setup needed: add your Telegram username in config.js');
-      console.warn('[landing] No Telegram username configured — set telegramUsername in config.js');
+    if (!tgLink && !waLink) {
+      setText('note', 'Setup needed: add your Telegram username or WhatsApp number in config.js');
+      console.warn('[landing] No chat configured — set telegramUsername / whatsappNumber in config.js');
     }
 
     // Trust row
@@ -598,13 +608,22 @@
 
     var rows = [];
 
-    if (chatLink) {
+    if (tgLink) {
       rows.push({
         icon: 'chat',
         label: 'Telegram',
         value: '@' + username + ' — fastest reply',
-        href: chatLink,
-        isCta: true
+        href: tgLink,
+        channel: 'tg'
+      });
+    }
+    if (waLink) {
+      rows.push({
+        icon: 'chat',
+        label: 'WhatsApp',
+        value: '+' + phone + ' — message us',
+        href: waLink,
+        channel: 'wa'
       });
     }
     if (C.contactEmail) {
@@ -629,7 +648,7 @@
 
     rows.forEach(function (r, i) {
       var a = document.createElement('a');
-      a.className = 'contact-row' + (r.isCta ? ' is-tg' : '');
+      a.className = 'contact-row' + (r.channel ? ' is-' + r.channel : '');
       a.setAttribute('href', r.href);
       a.setAttribute('data-reveal', '');
       a.style.setProperty('--d', i * 0.08 + 's');
@@ -637,10 +656,10 @@
         a.setAttribute('target', '_blank');
         a.setAttribute('rel', 'noopener');
       }
-      if (r.isCta) {
+      if (r.channel) {
         a.setAttribute('rel', 'noopener nofollow');
         a.setAttribute('target', isDesktop() ? '_blank' : '_self');
-        a.addEventListener('click', function () { goToTelegram(true); });
+        a.addEventListener('click', function () { goToChat(r.channel, true); });
       }
 
       var icon = document.createElement('span');
@@ -697,13 +716,13 @@
     });
   }
 
-  // Shows the sticky Telegram button once the hero button has scrolled away,
+  // Shows the sticky chat buttons once the hero button has scrolled away,
   // and tucks it away again while the closing call-to-action is on screen.
   function initSticky() {
     var bar = el('stickyCta');
     var hero = el('cta');
     var closing = el('ctaAlt');
-    if (!bar || !hero || !chatLink || !('IntersectionObserver' in window)) return;
+    if (!bar || !hero || !(tgLink || waLink) || !('IntersectionObserver' in window)) return;
 
     var heroGone = false;
     var closingVisible = false;
@@ -729,12 +748,17 @@
 
   var redirectDisabled = params.get('noredirect') === '1' || params.get('preview') === '1';
 
-  if (C.autoRedirect && chatLink && !redirectDisabled) {
-    setTimeout(function () { goToTelegram(false); },
+  // Auto-redirect goes to redirectChannel ("telegram" or "whatsapp"), or to
+  // whichever one is configured if that one isn't.
+  var redirectKey = C.redirectChannel === 'whatsapp' ? 'wa' : 'tg';
+  if (!CHANNELS[redirectKey].link) redirectKey = redirectKey === 'tg' ? 'wa' : 'tg';
+
+  if (C.autoRedirect && CHANNELS[redirectKey].link && !redirectDisabled) {
+    setTimeout(function () { goToChat(redirectKey, false); },
       Math.max(0, C.redirectDelayMs == null ? 1800 : C.redirectDelayMs));
   }
 
-  // If the visitor comes back (Telegram opened, then they hit back), reset the
+  // If the visitor comes back (the chat app opened, then they hit back), reset the
   // page instead of instantly bouncing them out again.
   window.addEventListener('pageshow', function (e) {
     if (!e.persisted) return;

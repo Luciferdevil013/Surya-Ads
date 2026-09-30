@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------
-   Surya Sports Media — Telegram Landing Page configuration
+   Surya Sports Media — Telegram + WhatsApp Landing Page configuration
    This is the ONLY file you normally need to edit.
    ------------------------------------------------------------------ */
 window.LP_CONFIG = {
@@ -16,16 +16,25 @@ window.LP_CONFIG = {
   logoMark: "assets/surya-mark.svg",
 
   // Telegram username every chat button opens (with or without the "@").
+  // Leave "" to hide every Telegram button.
   telegramUsername: "suryasportsmedia",
 
-  // Text pre-filled in the user's Telegram compose box.
+  // WhatsApp number every WhatsApp button opens. Full international format,
+  // digits only — India example: 91 + 9876543210 -> "919876543210".
+  // Leave "" to hide every WhatsApp button.
+  whatsappNumber: "919423576797",
+
+  // Text pre-filled in the user's Telegram / WhatsApp compose box.
   prefillMessage: "Hi Surya Sports Media! I'm interested in your digital advertising services. Please share the details and a free consultation.",
 
   /* ============ REDIRECT BEHAVIOUR ============ */
 
-  // Send the visitor to Telegram automatically, without them tapping.
+  // Send the visitor to a chat automatically, without them tapping.
   // Set to false if you want a pure click-through page (safer for ad review).
   autoRedirect: false,
+
+  // Which app the auto-redirect opens: "telegram" or "whatsapp".
+  redirectChannel: "telegram",
 
   // How long the landing page is visible before the auto-redirect fires (ms).
   // 2500 = 2.5 seconds. Keep this >= 1200 so the page is genuinely seen —
@@ -37,10 +46,10 @@ window.LP_CONFIG = {
   // Meta (Facebook) Pixel ID. The Pixel base code itself is pasted in the
   // <head> of index.html (Meta's domain check looks for it there) — if you
   // change pixels, update the ID in both places. Leave "" to stop the
-  // Telegram-click event.
+  // chat-click event.
   metaPixelId: "4029597787337053",
 
-  // Standard event fired when the visitor is sent to Telegram.
+  // Standard event fired when the visitor is sent to Telegram or WhatsApp.
   // Common choices: "Lead", "Contact", "InitiateCheckout".
   pixelClickEvent: "Lead",
 
@@ -54,12 +63,13 @@ window.LP_CONFIG = {
 
   // Lets one page serve many ads:
   //   ?u=someusername   -> override the Telegram username
+  //   ?n=919999999999   -> override the WhatsApp number
   //   ?m=Hello%20there  -> override the pre-filled message
   //   ?ref=summer_sale  -> campaign reference
   //   ?noredirect=1     -> disable auto-redirect (use this link for ad review)
   allowUrlOverrides: true,
 
-  // Append the campaign reference to the Telegram message so you can tell
+  // Append the campaign reference to the chat message so you can tell
   // which ad each lead came from. Reads ?ref= then ?utm_campaign=.
   appendRefToMessage: false,
   refMessageFormat: "\n\n(Ref: {ref})",
@@ -71,12 +81,13 @@ window.LP_CONFIG = {
   headline: "Ads that bring *real customers*, not just likes",
   subheadline: "Surya Sports Media plans, creates and manages your Google, Facebook & Instagram ads with AI-driven targeting — so every rupee you spend works harder.",
   buttonLabel: "Chat with us on Telegram",
+  whatsappButtonLabel: "Chat with us on WhatsApp",
   buttonSub: "Free consultation · No obligation",   // small line under the button text; "" to hide
-  reassurance: "Opens Telegram instantly · No spam, ever",
+  reassurance: "Pick Telegram or WhatsApp · No spam, ever",
   onlineLabel: "Online now",
 
-  redirectingText: "Opening Telegram…",
-  fallbackText: "Didn't open automatically? Tap the blue button above.",
+  redirectingText: "Opening {app}…",   // {app} becomes Telegram or WhatsApp
+  fallbackText: "Didn't open automatically? Tap one of the buttons above.",
 
   // The three floating labels around the sun in the hero (desktop only).
   heroChips: ["More qualified leads", "Higher ROI on ad spend", "AI-optimized targeting"],
@@ -144,7 +155,7 @@ window.LP_CONFIG = {
 
   servicesTitle: "Everything you need to *grow online*",
   aboutText: "Surya Sports Media is a full-service digital advertising agency powered by AI technology. We help businesses grow their online presence through targeted social media marketing, Google Ads management, WhatsApp marketing campaigns, and comprehensive digital strategies. Our data-driven approach ensures maximum ROI for your advertising budget.",
-  servicesNote: "Not sure what you need? We'll recommend the right mix on a free Telegram chat.",
+  servicesNote: "Not sure what you need? We'll recommend the right mix on a free Telegram or WhatsApp chat.",
   // featured: true makes a service a big card (the first two work best).
   services: [
     { icon: "search",  title: "Google Ads Management",       featured: true, text: "Expert management of Google Search, Display, and Shopping campaigns with AI-driven optimization for maximum conversions." },
@@ -163,7 +174,7 @@ window.LP_CONFIG = {
 
   stepsTitle: "Get started in *3 simple steps*",
   steps: [
-    { title: "Free consultation", text: "Message us on Telegram. We analyze your current digital presence and show you exactly where growth opportunities exist." },
+    { title: "Free consultation", text: "Message us on Telegram or WhatsApp. We analyze your current digital presence and show you exactly where growth opportunities exist." },
     { title: "Strategy & launch", text: "We create a custom marketing strategy, set up your campaigns, and launch with AI-optimized targeting." },
     { title: "Optimize & scale",  text: "We monitor performance, optimize campaigns daily, and scale what works while cutting what doesn't." }
   ],
@@ -190,11 +201,11 @@ window.LP_CONFIG = {
   /* ============ CLOSING CALL-TO-ACTION ============ */
 
   closingTitle: "Ready to *grow* your business?",
-  closingText: "Send us one message on Telegram. We'll analyze your current digital presence and show you exactly where growth opportunities exist — no obligation.",
+  closingText: "Send us one message on Telegram or WhatsApp. We'll analyze your current digital presence and show you exactly where growth opportunities exist — no obligation.",
 
   /* ============ FOOTER / LEGAL ============ */
 
-  footerNote: "Chat with us on Telegram · @suryasportsmedia",
+  footerNote: "Chat with us on Telegram or WhatsApp",
   privacyUrl: "privacy.html",
   termsUrl: "terms.html",
 
@@ -206,8 +217,8 @@ window.LP_CONFIG = {
 
   /* ============ SEO / SHARING ============ */
 
-  pageTitle: "Surya Sports Media — Ads That Bring Real Customers | Chat on Telegram",
-  pageDescription: "Surya Sports Media provides AI-powered digital marketing solutions. Google Ads, Social Media, WhatsApp Marketing. Message us on Telegram for a free consultation.",
+  pageTitle: "Surya Sports Media — Ads That Bring Real Customers | Chat on Telegram or WhatsApp",
+  pageDescription: "Surya Sports Media provides AI-powered digital marketing solutions. Google Ads, Social Media, WhatsApp Marketing. Message us on Telegram or WhatsApp for a free consultation.",
   // Absolute URL of a 1200x630 preview image, or "" for none.
   shareImage: "assets/og-image.png?v=2"
 };

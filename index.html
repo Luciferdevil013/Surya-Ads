@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Surya Sports Media — Ads That Bring Real Customers | Chat on Telegram</title>
-<meta name="description" content="Surya Sports Media plans, creates and manages your Google, Facebook & Instagram ads with AI-driven targeting. Message us on Telegram for a free consultation.">
+<title>Surya Sports Media — Ads That Bring Real Customers | Chat on Telegram or WhatsApp</title>
+<meta name="description" content="Surya Sports Media plans, creates and manages your Google, Facebook & Instagram ads with AI-driven targeting. Message us on Telegram or WhatsApp for a free consultation.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#120C1C">
 <meta name="format-detection" content="telephone=no">
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Surya Sports Media">
 <meta property="og:title" content="Surya Sports Media — Ads That Bring Real Customers">
-<meta property="og:description" content="Google, Facebook & Instagram ads with AI-driven targeting. Free consultation on Telegram.">
+<meta property="og:description" content="Google, Facebook & Instagram ads with AI-driven targeting. Free consultation on Telegram or WhatsApp.">
 <meta property="og:image" content="assets/og-image.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -48,10 +48,13 @@
     /* "online" status dot */
     --green:        #25D366;
 
-    /* Telegram — reserved for the CTA only */
+    /* Telegram + WhatsApp — reserved for the chat buttons only */
     --tg:           #2AABEE;
     --tg-2:         #229ED9;
     --tg-3:         #1A7FC1;
+    --wa:           #25D366;
+    --wa-2:         #1DAA57;
+    --wa-3:         #128C4E;
 
     /* night sky — hero and dark cards */
     --night:        #120C1C;
@@ -228,9 +231,12 @@
     text-wrap: pretty;
   }
 
-  /* ---------- Telegram CTA ---------- */
+  /* ---------- chat CTAs (Telegram + WhatsApp) ---------- */
+
+  .cta-group { display: flex; flex-direction: column; align-items: center; gap: 12px; }
 
   .cta {
+    --glow: 42,171,238;
     position: relative;
     display: inline-flex; align-items: center; gap: 14px;
     width: 100%; max-width: 440px;
@@ -243,7 +249,7 @@
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,.35),
       inset 0 -2px 0 rgba(0,0,0,.10),
-      0 16px 34px -8px rgba(42,171,238,.55);
+      0 16px 34px -8px rgba(var(--glow),.55);
     transition: transform .18s var(--ease), box-shadow .18s var(--ease);
     -webkit-tap-highlight-color: transparent;
   }
@@ -256,8 +262,17 @@
     animation: ctaPulse 2.4s var(--ease) infinite;
   }
 
-  .cta:hover  { color: #fff; transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -2px 0 rgba(0,0,0,.10), 0 22px 40px -8px rgba(42,171,238,.6); }
+  .cta:hover  { color: #fff; transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -2px 0 rgba(0,0,0,.10), 0 22px 40px -8px rgba(var(--glow),.6); }
   .cta:active { transform: translateY(0) scale(.99); }
+
+  .cta-wa {
+    --glow: 37,211,102;
+    background: linear-gradient(135deg, #2AD46F 0%, var(--wa-2) 45%, var(--wa-3) 80%, #0F7A43 100%);
+  }
+
+  /* keep the two buttons' pulse and shine out of step */
+  .cta-wa::after { animation-delay: 1.2s; }
+  .cta-wa .cta-shine::before { animation-delay: 3.3s; }
   .cta:focus-visible { outline: 3px solid var(--sun-3); outline-offset: 3px; }
 
   .cta-shine { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; pointer-events: none; }
@@ -629,20 +644,31 @@
 
   .section-cta { text-align: center; margin-top: 44px; }
 
-  .btn-tg-outline {
+  .section-cta-label { font-size: 15px; font-weight: 700; color: var(--ink-soft); margin-bottom: 14px; }
+
+  .section-cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+  .btn-chat-outline {
     display: inline-flex; align-items: center; gap: 10px;
     padding: 13px 22px 13px 16px;
     border-radius: 999px;
-    border: 1.5px solid rgba(34,158,217,.3);
-    background: #EEF8FE;
-    color: #146BA6;
+    border: 1.5px solid;
     font-size: 15px; font-weight: 700;
     text-decoration: none;
     transition: background .2s, transform .2s var(--ease), border-color .2s;
   }
 
-  .btn-tg-outline:hover { background: #DCF0FC; color: #0F5A8C; border-color: rgba(34,158,217,.5); transform: translateY(-2px); }
-  .btn-tg-outline:focus-visible { outline: 3px solid var(--tg); outline-offset: 3px; }
+  .btn-chat-outline:hover { transform: translateY(-2px); }
+
+  .btn-chat-outline.is-tg { border-color: rgba(34,158,217,.3); background: #EEF8FE; color: #146BA6; }
+  .btn-chat-outline.is-tg svg { fill: var(--tg-2); }
+  .btn-chat-outline.is-tg:hover { background: #DCF0FC; color: #0F5A8C; border-color: rgba(34,158,217,.5); }
+  .btn-chat-outline.is-tg:focus-visible { outline: 3px solid var(--tg); outline-offset: 3px; }
+
+  .btn-chat-outline.is-wa { border-color: rgba(18,140,78,.3); background: #F0FDF4; color: #0F7A43; }
+  .btn-chat-outline.is-wa svg { fill: var(--wa-3); }
+  .btn-chat-outline.is-wa:hover { background: #DCFCE7; color: #0B6536; border-color: rgba(18,140,78,.5); }
+  .btn-chat-outline.is-wa:focus-visible { outline: 3px solid var(--wa); outline-offset: 3px; }
 
   /* ---------- problem vs solution ---------- */
 
@@ -918,6 +944,8 @@
 
   .contact-row.is-tg .contact-icon { background: #E6F4FD; }
   .contact-row.is-tg .contact-icon svg { stroke: var(--tg-3); }
+  .contact-row.is-wa .contact-icon { background: #E6F8EE; }
+  .contact-row.is-wa .contact-icon svg { stroke: var(--wa-3); }
 
   .contact-row > span:last-child { min-width: 0; }
 
@@ -950,10 +978,11 @@
   .footer a:hover { color: var(--brand-ink); text-decoration: underline; }
   .footer .sep { opacity: .5; margin: 0 7px; }
 
-  /* ---------- sticky Telegram bar ---------- */
+  /* ---------- sticky chat bar ---------- */
 
   .sticky-cta {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    display: flex; justify-content: center; gap: 10px;
     padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
     background: linear-gradient(to top, rgba(255,255,255,.97) 55%, rgba(255,255,255,0));
     translate: 0 120%;
@@ -963,11 +992,10 @@
 
   .sticky-cta.is-visible { translate: none; visibility: visible; transition: translate .4s var(--ease), visibility 0s; }
 
-  .sticky-cta .cta { display: flex; max-width: 520px; margin: 0 auto; padding: 9px 14px 9px 9px; border-radius: 16px; }
+  .sticky-cta .cta { flex: 1 1 0; min-width: 0; max-width: 260px; gap: 10px; padding: 8px 12px 8px 8px; border-radius: 16px; }
   .sticky-cta .cta::after { animation: none; }
-  .sticky-cta .cta-icon { width: 40px; height: 40px; border-radius: 11px; }
+  .sticky-cta .cta-icon { width: 38px; height: 38px; border-radius: 11px; }
   .sticky-cta .cta-label { font-size: 16px; }
-  .sticky-cta .cta-sub { font-size: 12px; }
 
   /* ================= MOTION ================= */
 
@@ -989,9 +1017,9 @@
   }
 
   @keyframes ctaPulse {
-    0%   { box-shadow: 0 0 0 0 rgba(42,171,238,.5); }
-    70%  { box-shadow: 0 0 0 16px rgba(42,171,238,0); }
-    100% { box-shadow: 0 0 0 0 rgba(42,171,238,0); }
+    0%   { box-shadow: 0 0 0 0 rgba(var(--glow),.5); }
+    70%  { box-shadow: 0 0 0 16px rgba(var(--glow),0); }
+    100% { box-shadow: 0 0 0 0 rgba(var(--glow),0); }
   }
 
   @keyframes livePulse {
@@ -1046,11 +1074,10 @@
 
     .footer { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
 
-    /* floating bubble instead of a full-width bar */
-    .sticky-cta { left: auto; right: 24px; bottom: 24px; padding: 0; background: none; }
-    .sticky-cta .cta { width: auto; padding: 8px 18px 8px 8px; border-radius: 999px; box-shadow: 0 18px 40px -10px rgba(18,140,78,.55); }
+    /* floating bubbles instead of a full-width bar */
+    .sticky-cta { left: auto; right: 24px; bottom: 24px; padding: 0; background: none; flex-direction: column; align-items: stretch; }
+    .sticky-cta .cta { flex: none; width: auto; padding: 8px 18px 8px 8px; border-radius: 999px; box-shadow: 0 18px 40px -10px rgba(var(--glow),.55); }
     .sticky-cta .cta-icon { border-radius: 50%; }
-    .sticky-cta .cta-sub, .sticky-cta .cta-arrow { display: none; }
   }
 
   @media (min-width: 960px) {
@@ -1137,20 +1164,33 @@ src="https://www.facebook.com/tr?id=4029597787337053&ev=PageView&noscript=1"
     </p>
 
     <div class="rise" style="--d:.28s">
-      <a class="cta" id="cta" data-tg href="#" rel="noopener nofollow">
-        <span class="cta-shine" aria-hidden="true"></span>
-        <span class="cta-icon" aria-hidden="true">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-        </span>
-        <span class="cta-text">
-          <span class="cta-label" data-label>Chat with us on Telegram</span>
-          <span class="cta-sub" data-sub>Free consultation · No obligation</span>
-        </span>
-        <span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-      </a>
+      <div class="cta-group" id="cta">
+        <a class="cta" data-tg href="#" rel="noopener nofollow">
+          <span class="cta-shine" aria-hidden="true"></span>
+          <span class="cta-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </span>
+          <span class="cta-text">
+            <span class="cta-label" data-label="tg">Chat with us on Telegram</span>
+            <span class="cta-sub" data-sub>Free consultation · No obligation</span>
+          </span>
+          <span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+        <a class="cta cta-wa" data-wa href="#" rel="noopener nofollow">
+          <span class="cta-shine" aria-hidden="true"></span>
+          <span class="cta-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </span>
+          <span class="cta-text">
+            <span class="cta-label" data-label="wa">Chat with us on WhatsApp</span>
+            <span class="cta-sub" data-sub>Free consultation · No obligation</span>
+          </span>
+          <span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </a>
+      </div>
 
-      <p class="note" id="note" role="status" aria-live="polite">Opens Telegram instantly · No spam, ever</p>
-      <p class="fallback" id="fallback">Didn't open automatically? Tap the blue button above.</p>
+      <p class="note" id="note" role="status" aria-live="polite">Pick Telegram or WhatsApp · No spam, ever</p>
+      <p class="fallback" id="fallback">Didn't open automatically? Tap one of the buttons above.</p>
     </div>
 
     <div class="hero-meta rise" style="--d:.36s">
@@ -1199,10 +1239,17 @@ src="https://www.facebook.com/tr?id=4029597787337053&ev=PageView&noscript=1"
       </div>
       <div class="client-grid" id="clientGrid"></div>
       <div class="section-cta" data-reveal>
-        <a class="btn-tg-outline" data-tg href="#" rel="noopener nofollow">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="#229ED9" aria-hidden="true" focusable="false"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-          <span id="clientsCtaLabel">Want to be next? Chat with us</span>
-        </a>
+        <p class="section-cta-label" id="clientsCtaLabel">Want to be next? Chat with us</p>
+        <div class="section-cta-row">
+          <a class="btn-chat-outline is-tg" data-tg href="#" rel="noopener nofollow">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            <span>Telegram</span>
+          </a>
+          <a class="btn-chat-outline is-wa" data-wa href="#" rel="noopener nofollow">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            <span>WhatsApp</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -1288,19 +1335,32 @@ src="https://www.facebook.com/tr?id=4029597787337053&ev=PageView&noscript=1"
       <div class="closing dark" data-reveal>
         <div class="avatars" id="closingAvatars" hidden></div>
         <h2 id="closingTitle">Ready to <span class="accent">grow</span> your business?</h2>
-        <p class="closing-text" id="closingText">Send us one message on Telegram. We'll analyze your current digital presence and show you exactly where growth opportunities exist — no obligation.</p>
-        <a class="cta" id="ctaAlt" data-tg href="#" rel="noopener nofollow">
-          <span class="cta-shine" aria-hidden="true"></span>
-          <span class="cta-icon" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-          </span>
-          <span class="cta-text">
-            <span class="cta-label" data-label>Chat with us on Telegram</span>
-            <span class="cta-sub" data-sub>Free consultation · No obligation</span>
-          </span>
-          <span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </a>
-        <p class="note" id="closingNote">Opens Telegram instantly · No spam, ever</p>
+        <p class="closing-text" id="closingText">Send us one message on Telegram or WhatsApp. We'll analyze your current digital presence and show you exactly where growth opportunities exist — no obligation.</p>
+        <div class="cta-group" id="ctaAlt">
+          <a class="cta" data-tg href="#" rel="noopener nofollow">
+            <span class="cta-shine" aria-hidden="true"></span>
+            <span class="cta-icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            </span>
+            <span class="cta-text">
+              <span class="cta-label" data-label="tg">Chat with us on Telegram</span>
+              <span class="cta-sub" data-sub>Free consultation · No obligation</span>
+            </span>
+            <span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+          <a class="cta cta-wa" data-wa href="#" rel="noopener nofollow">
+            <span class="cta-shine" aria-hidden="true"></span>
+            <span class="cta-icon" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            </span>
+            <span class="cta-text">
+              <span class="cta-label" data-label="wa">Chat with us on WhatsApp</span>
+              <span class="cta-sub" data-sub>Free consultation · No obligation</span>
+            </span>
+            <span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </a>
+        </div>
+        <p class="note" id="closingNote">Pick Telegram or WhatsApp · No spam, ever</p>
       </div>
     </div>
   </section>
@@ -1328,7 +1388,7 @@ src="https://www.facebook.com/tr?id=4029597787337053&ev=PageView&noscript=1"
     </div>
     <p id="footerTagline">AI-Powered Digital Advertising Solutions</p>
     <p>
-      <span id="footerNote">Chat with us on Telegram · @suryasportsmedia</span>
+      <span id="footerNote">Chat with us on Telegram or WhatsApp</span>
       <span class="sep">·</span>
       <span>&copy; <span id="footerYear"></span> <span id="footerBrand">Surya Sports Media</span></span>
     </p>
@@ -1340,17 +1400,19 @@ src="https://www.facebook.com/tr?id=4029597787337053&ev=PageView&noscript=1"
   </div>
 </footer>
 
-<!-- sticky Telegram button — shown once the hero button scrolls away -->
+<!-- sticky chat buttons — shown once the hero buttons scroll away -->
 <div class="sticky-cta" id="stickyCta">
-  <a class="cta" data-tg href="#" rel="noopener nofollow">
+  <a class="cta" data-tg href="#" rel="noopener nofollow" aria-label="Chat with us on Telegram">
     <span class="cta-icon" aria-hidden="true">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
     </span>
-    <span class="cta-text">
-      <span class="cta-label" data-label>Chat with us on Telegram</span>
-      <span class="cta-sub" data-sub>Free consultation · No obligation</span>
+    <span class="cta-text"><span class="cta-label">Telegram</span></span>
+  </a>
+  <a class="cta cta-wa" data-wa href="#" rel="noopener nofollow" aria-label="Chat with us on WhatsApp">
+    <span class="cta-icon" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
     </span>
-    <span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    <span class="cta-text"><span class="cta-label">WhatsApp</span></span>
   </a>
 </div>
 
