@@ -44,11 +44,11 @@ window.LP_CONFIG = {
   // <head> of index.html (Meta's domain check looks for it there) — if you
   // change pixels, update the ID in both places. Leave "" to stop the
   // chat-click event.
-  metaPixelId: "4029597787337053",
+  metaPixelId: "1076329191902827",
 
   // Standard event fired when the visitor taps a chat button.
   // Common choices: "Lead", "Contact", "Subscribe".
-  pixelClickEvent: "Lead",
+  pixelClickEvent: "Subscribe",
 
   // Google Analytics 4 measurement ID (e.g. "G-XXXXXXX") — leave "" to disable.
   ga4Id: "",

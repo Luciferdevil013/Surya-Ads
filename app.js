@@ -74,10 +74,7 @@
 
     try {
       if (window.fbq && C.metaPixelId && C.pixelClickEvent) {
-        window.fbq('track', C.pixelClickEvent, {
-          content_name: C.brandName || 'Chat lead',
-          content_category: ch.name.toLowerCase() + '_redirect'
-        });
+        window.fbq('track', C.pixelClickEvent);
       }
     } catch (e) { /* never block the redirect on a tracking error */ }
 
