@@ -66,15 +66,19 @@
 
   /* ---------------- tracking ---------------- */
 
-  var tracked = false;
+  // One event per channel per page view — a visitor who taps Telegram and
+  // then WhatsApp should count for both.
+  var tracked = {};
 
   function fireTracking(ch) {
-    if (tracked) return;
-    tracked = true;
+    if (tracked[ch.name]) return;
+    tracked[ch.name] = true;
 
     try {
       if (window.fbq && C.metaPixelId && C.pixelClickEvent) {
-        window.fbq('track', C.pixelClickEvent);
+        window.fbq('track', C.pixelClickEvent, {
+          content_category: ch.name.toLowerCase()
+        });
       }
     } catch (e) { /* never block the redirect on a tracking error */ }
 
