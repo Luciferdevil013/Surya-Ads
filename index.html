@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Surya Sports Media — Ads That Bring Real Customers | Chat on Telegram or WhatsApp</title>
-<meta name="description" content="Surya Sports Media plans, creates and manages your Google, Facebook & Instagram ads with AI-driven targeting. Message us on Telegram or WhatsApp for a free consultation.">
+<title>Surya Sports Media — Chat on Telegram or WhatsApp</title>
+<meta name="description" content="Message Surya Sports Media on Telegram or WhatsApp for a free consultation. No forms, no waiting.">
 <meta name="robots" content="index, follow">
-<meta name="theme-color" content="#120C1C">
+<meta name="theme-color" content="#fff1e4">
 <meta name="format-detection" content="telephone=no">
 
 <!-- Open Graph / social preview (values are refreshed from config.js at runtime) -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Surya Sports Media">
-<meta property="og:title" content="Surya Sports Media — Ads That Bring Real Customers">
-<meta property="og:description" content="Google, Facebook & Instagram ads with AI-driven targeting. Free consultation on Telegram or WhatsApp.">
+<meta property="og:title" content="Surya Sports Media — Chat on Telegram or WhatsApp">
+<meta property="og:description" content="Message Surya Sports Media on Telegram or WhatsApp for a free consultation. No forms, no waiting.">
 <meta property="og:image" content="assets/og-image.png?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -26,1016 +26,236 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  [hidden] { display: none !important; }
 
   :root {
-    /* Surya Sports Media brand — sunrise orange/amber */
-    --sun-1:        #FF5A1F;
-    --sun-2:        #FF8A00;
-    --sun-3:        #FFB547;
-    --sun-4:        #FFD66B;
-    --sun-grad:     linear-gradient(120deg, var(--sun-1), var(--sun-2) 55%, var(--sun-3));
-    --glow-text:    linear-gradient(100deg, #FFE08A 0%, #FFB547 35%, #FF8A00 70%, #FF6A2B 100%);
-    --accent-text:  linear-gradient(100deg, #EA580C 0%, #F97316 55%, #F59E0B 100%);
-    --brand-ink:    #C2410C;
-    --brand-tint:   #FFF3E8;
-    --brand-line:   #FFE0C7;
-
-    /* "online" status dot */
-    --green:        #25D366;
-
-    /* Telegram + WhatsApp — reserved for the chat buttons only */
-    --tg:           #2AABEE;
-    --tg-2:         #229ED9;
-    --tg-3:         #1A7FC1;
+    --sun:          #EC6A2C;
+    --sun-deep:     #C2410C;
+    --sun-darker:   #9A3412;
+    --tg:           #229ED9;
+    --tg-deep:      #1A7FC1;
     --wa:           #25D366;
-    --wa-2:         #1DAA57;
-    --wa-3:         #128C4E;
-
-    /* night sky — hero and dark cards */
-    --night:        #120C1C;
-    --night-2:      #1C1428;
-
+    --wa-deep:      #128C4E;
     --ink:          #1A1523;
-    --ink-soft:     #4F4860;
-    --ink-faint:    #736D82;
-    --line:         #EEE6DE;
-    --bg:           #FFFFFF;
-    --bg-tint:      #FFF9F4;
-
-    --shadow-sm:    0 1px 2px rgba(26,21,35,.04), 0 6px 18px -6px rgba(26,21,35,.08);
-    --shadow-md:    0 2px 6px rgba(26,21,35,.05), 0 18px 40px -12px rgba(26,21,35,.18);
-    --ease:         cubic-bezier(.2,.7,.2,1);
+    --ink-soft:     #574F60;
+    --ink-faint:    #8E8697;
+    --ink-ghost:    #ADA6B4;
+    --line:         #FFE0C7;
+    --chip-bg:      #FFEBDC;
   }
 
-  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: clip; }
+  html { -webkit-text-size-adjust: 100%; }
 
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
     color: var(--ink);
-    background: var(--bg);
-    line-height: 1.5;
-    overflow-x: clip;
+    background: #FFF9F4;
   }
 
-  a { color: var(--brand-ink); }
-  img { max-width: 100%; display: block; }
+  a { color: var(--sun-deep); }
+  a:hover { color: var(--sun-darker); }
 
-  .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+  [hidden] { display: none !important; }
 
-  /* highlighted words — written as *words* in config.js */
-  .accent {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1.08em;
-    letter-spacing: -0.01em;
-    padding: 0 .06em 0 .02em;
-    margin-right: -.08em;
-    background: var(--accent-text);
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent; color: transparent;
-    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  .page {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: radial-gradient(1200px 600px at 50% -10%, #FFF1E4 0%, #FFF9F4 45%, #FFFFFF 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 20px calc(40px + env(safe-area-inset-bottom));
   }
 
-  .hero .accent, .dark .accent { background-image: var(--glow-text); }
-
-  /* ================= HERO ================= */
-
-  .hero {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    background: var(--night);
-    color: #fff;
-    padding-top: calc(14px + env(safe-area-inset-top));
-  }
-
-  .hero-bg {
-    position: absolute; inset: 0; z-index: -1;
-    background:
-      radial-gradient(700px 440px at 8% -12%, rgba(124,58,237,.30), transparent 62%),
-      radial-gradient(620px 420px at 96% 4%, rgba(255,90,31,.20), transparent 60%),
-      radial-gradient(1000px 520px at 50% 108%, rgba(255,138,0,.34), transparent 66%),
-      var(--night);
-  }
-
-  .hero-bg::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
-    background-size: 44px 44px;
-    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 28%, #000 25%, transparent 75%);
-            mask-image: radial-gradient(ellipse 80% 60% at 50% 28%, #000 25%, transparent 75%);
-  }
+  .shell { width: 100%; max-width: 520px; }
 
   /* ---------- header ---------- */
 
   .topbar {
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    padding-top: 6px; padding-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8vh;
   }
 
-  .brand { display: inline-flex; align-items: center; gap: 10px; min-width: 0; color: inherit; text-decoration: none; }
-
-  .brand-logo { width: 36px; height: 36px; flex: none; }
+  .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
 
   .brand-mark {
-    width: 36px; height: 36px; flex: none;
-    border-radius: 10px;
-    background: var(--sun-grad);
-    display: none; align-items: center; justify-content: center;
-    color: #fff; font-weight: 800; font-size: 17px;
+    width: 38px; height: 38px;
+    flex: none;
+    border-radius: 11px;
+    background: linear-gradient(135deg, var(--sun), var(--sun-deep));
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 800; font-size: 18px;
+    overflow: hidden;
   }
 
-  /* swapped in by app.js only when the logo image is missing or not configured */
-  .no-logo .brand-mark { display: flex; }
-  .no-logo .brand-logo { display: none; }
+  .brand-mark.has-logo { background: none; }
+  .brand-mark img { width: 100%; height: 100%; display: block; }
 
   .brand-name {
-    font-weight: 800; font-size: 19px; letter-spacing: -0.02em;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  }
-
-  .brand-name .rev {
-    background: var(--sun-grad);
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent; color: transparent;
+    font-weight: 700; font-size: 17px;
+    color: var(--ink); letter-spacing: -0.01em;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
   }
 
   .status-pill {
     flex: none;
-    display: inline-flex; align-items: center; gap: 7px;
     font-size: 12px; font-weight: 600;
-    color: #86EFAC;
-    background: rgba(37,211,102,.10);
-    border: 1px solid rgba(37,211,102,.28);
+    color: var(--sun-deep);
+    background: var(--chip-bg);
     padding: 6px 12px;
     border-radius: 999px;
   }
 
-  .status-pill::before {
-    content: '';
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--green);
-    animation: livePulse 2s infinite;
-  }
+  /* ---------- hero ---------- */
 
-  /* ---------- hero copy ---------- */
-
-  .hero-inner { position: relative; z-index: 2; text-align: center; padding-top: 46px; }
-
-  .rise { animation: rise .8s var(--ease) both; animation-delay: var(--d, 0s); }
+  .hero { text-align: center; animation: floatUp .5s ease both; }
 
   .badge {
-    display: inline-flex; align-items: center; gap: 9px;
-    padding: 7px 15px 7px 11px;
+    display: inline-flex; align-items: center; gap: 7px;
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 7px 14px;
     border-radius: 999px;
-    background: rgba(255,255,255,.06);
-    border: 1px solid rgba(255,255,255,.13);
     font-size: 13px; font-weight: 600;
-    color: rgba(255,255,255,.88);
-    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-    margin-bottom: 22px;
+    color: #7C2D12;
+    box-shadow: 0 4px 16px rgba(236,106,44,0.08);
+    margin-bottom: 24px;
   }
 
   .badge-dot {
     width: 8px; height: 8px; border-radius: 50%;
-    background: var(--sun-3);
-    animation: dotPulse 2.2s infinite;
+    background: var(--wa);
+    display: inline-block;
   }
 
   h1 {
-    font-size: clamp(35px, 10vw, 68px);
-    line-height: 1.04;
-    font-weight: 800;
-    letter-spacing: -0.035em;
+    font-size: 38px; line-height: 1.12; font-weight: 800;
+    color: var(--ink); letter-spacing: -0.02em;
     text-wrap: balance;
-    max-width: 860px;
-    margin: 0 auto 18px;
-  }
-
-  .sub {
-    font-size: clamp(16px, 2.2vw, 19px);
-    line-height: 1.6;
-    color: rgba(255,255,255,.74);
-    max-width: 620px;
-    margin: 0 auto 30px;
-    text-wrap: pretty;
-  }
-
-  /* ---------- chat CTAs (Telegram + WhatsApp) ---------- */
-
-  .cta-group { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-
-  .cta {
-    --glow: 42,171,238;
-    position: relative;
-    display: inline-flex; align-items: center; gap: 14px;
-    width: 100%; max-width: 440px;
-    padding: 13px 16px 13px 13px;
-    border-radius: 18px;
-    background: linear-gradient(135deg, #37B8F5 0%, var(--tg-2) 45%, var(--tg-3) 80%, #146BA6 100%);
-    color: #fff;
-    text-align: left;
-    text-decoration: none;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.35),
-      inset 0 -2px 0 rgba(0,0,0,.10),
-      0 16px 34px -8px rgba(var(--glow),.55);
-    transition: transform .18s var(--ease), box-shadow .18s var(--ease);
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  .cta::after {
-    content: '';
-    position: absolute; inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    animation: ctaPulse 2.4s var(--ease) infinite;
-  }
-
-  .cta:hover  { color: #fff; transform: translateY(-2px); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), inset 0 -2px 0 rgba(0,0,0,.10), 0 22px 40px -8px rgba(var(--glow),.6); }
-  .cta:active { transform: translateY(0) scale(.99); }
-
-  .cta-wa {
-    --glow: 37,211,102;
-    background: linear-gradient(135deg, #2AD46F 0%, var(--wa-2) 45%, var(--wa-3) 80%, #0F7A43 100%);
-  }
-
-  /* keep the two buttons' pulse and shine out of step */
-  .cta-wa::after { animation-delay: 1.2s; }
-  .cta-wa .cta-shine::before { animation-delay: 3.3s; }
-  .cta:focus-visible { outline: 3px solid var(--sun-3); outline-offset: 3px; }
-
-  .cta-shine { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; pointer-events: none; }
-
-  .cta-shine::before {
-    content: '';
-    position: absolute; top: 0; bottom: 0; left: 0;
-    width: 38%;
-    background: linear-gradient(100deg, transparent, rgba(255,255,255,.42), transparent);
-    transform: translateX(-160%) skewX(-18deg);
-    animation: shine 4.2s ease-in-out 1.2s infinite;
-  }
-
-  .cta-icon, .cta-text, .cta-arrow { position: relative; }
-
-  .cta-icon {
-    flex: none;
-    width: 46px; height: 46px;
-    border-radius: 13px;
-    background: rgba(255,255,255,.18);
-    display: grid; place-items: center;
-  }
-
-  .cta-text { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-
-  .cta-label {
-    font-size: 18px; font-weight: 800; line-height: 1.2;
-    letter-spacing: -0.01em;
-    text-shadow: 0 1px 1px rgba(0,0,0,.14);
-  }
-
-  .cta-sub { font-size: 12.5px; font-weight: 600; line-height: 1.3; margin-top: 2px; color: rgba(255,255,255,.92); }
-
-  .cta-arrow {
-    flex: none;
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: rgba(255,255,255,.2);
-    display: grid; place-items: center;
-    transition: transform .2s var(--ease);
-  }
-
-  .cta-arrow svg { width: 16px; height: 16px; }
-  .cta:hover .cta-arrow { transform: translateX(3px); }
-
-  .note {
-    font-size: 13px;
-    color: rgba(255,255,255,.55);
-    margin-top: 14px;
-    min-height: 20px;
-  }
-
-  .note.is-active { color: #86EFAC; font-weight: 600; }
-
-  .fallback {
-    font-size: 13px; font-weight: 600;
-    color: rgba(255,255,255,.82);
-    margin-top: 6px;
-    display: none;
-  }
-
-  .fallback.is-visible { display: block; animation: rise .35s ease both; }
-
-  /* ---------- proof + stats ---------- */
-
-  .hero-meta {
-    display: flex; flex-direction: column; align-items: center; gap: 22px;
-    margin-top: 26px;
-  }
-
-  .proof { display: inline-flex; align-items: center; gap: 12px; text-align: left; }
-
-  .avatars { display: flex; }
-
-  .avatar {
-    position: relative;
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid var(--night);
-    background: var(--sun-grad);
-    margin-left: -8px;
-    display: grid; place-items: center;
-    font-size: 13px; font-weight: 800; color: #fff;
-    flex: none;
-  }
-
-  .avatar:first-child { margin-left: 0; }
-  .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-
-  .proof-text { font-size: 13.5px; line-height: 1.4; color: rgba(255,255,255,.7); max-width: 250px; }
-  .proof-text strong { color: #fff; font-weight: 700; }
-
-  .trust { display: flex; justify-content: center; }
-
-  .trust > div { padding: 0 13px; border-left: 1px solid rgba(255,255,255,.13); }
-  .trust > div:first-child { border-left: 0; }
-
-  .stat-value {
-    font-size: 17px; font-weight: 800; letter-spacing: -0.02em; white-space: nowrap;
-    background: var(--glow-text);
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent; color: transparent;
-  }
-
-  .stat-label {
-    font-size: 10.5px; font-weight: 600;
-    color: rgba(255,255,255,.55);
-    text-transform: uppercase;
-    letter-spacing: .06em;
-    margin-top: 2px;
-    white-space: nowrap;
-  }
-
-  /* ---------- sunrise + orbiting platforms ---------- */
-
-  .sunrise {
-    --orbit: min(420px, 108vw);
-    --tile: 44px;
-    position: relative;
-    height: calc(var(--orbit) / 2 + 26px);
-    margin-top: 30px;
-    overflow: hidden;
-    pointer-events: none;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
-            mask-image: linear-gradient(to bottom, transparent 0, #000 22%);
-  }
-
-  /* the horizon line the sun sits on */
-  .sunrise::after {
-    content: '';
-    position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255,181,71,.6) 25%, rgba(255,224,138,.95) 50%, rgba(255,181,71,.6) 75%, transparent);
-  }
-
-  .orbit {
-    position: absolute; left: 50%; bottom: 0;
-    width: var(--orbit); height: var(--orbit);
-    transform: translate(-50%, 50%);
-  }
-
-  .rays {
-    position: absolute; inset: -25%;
-    border-radius: 50%;
-    background: repeating-conic-gradient(from 0deg, rgba(255,196,110,.22) 0deg 2.5deg, transparent 2.5deg 12deg);
-    -webkit-mask-image: radial-gradient(circle closest-side, #000 22%, transparent 92%);
-            mask-image: radial-gradient(circle closest-side, #000 22%, transparent 92%);
-    animation: spin 140s linear infinite;
-    will-change: transform;
-  }
-
-  .ring { position: absolute; border-radius: 50%; }
-  .ring-1 { inset: 19%; border: 1px dashed rgba(255,255,255,.16); }
-  .ring-2 { inset: 6%;  border: 1px solid rgba(255,255,255,.11); }
-
-  .orbit-track { position: absolute; inset: 0; animation: spin 52s linear infinite; will-change: transform; }
-
-  .orbit-slot {
-    position: absolute; left: 50%; top: 50%;
-    width: var(--tile); height: var(--tile);
-    margin: calc(var(--tile) / -2) 0 0 calc(var(--tile) / -2);
-    transform: rotate(var(--a)) translateX(calc(var(--orbit) * .44)) rotate(calc(-1 * var(--a)));
-  }
-
-  .orbit-icon {
-    width: 100%; height: 100%;
-    border-radius: 30%;
-    display: grid; place-items: center;
-    box-shadow: 0 12px 26px -8px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.35);
-    animation: spin 52s linear infinite reverse;
-  }
-
-  .orbit-icon svg { width: 54%; height: 54%; }
-
-  .ic-fb { background: #1877F2; }
-  .ic-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 92%); }
-  .ic-g, .ic-yt { background: #fff; }
-  .ic-wa { background: #25D366; }
-  .ic-in { background: #0A66C2; }
-
-  .sun {
-    position: absolute; inset: 32%;
-    border-radius: 50%;
-    background: radial-gradient(circle at 50% 38%, #FFF4CC 0%, #FFD66B 24%, #FFB547 46%, #FF8A00 74%, #FF5A1F 100%);
-    box-shadow:
-      0 0 40px 10px rgba(255,160,40,.55),
-      0 0 120px 40px rgba(255,110,20,.32),
-      0 0 240px 90px rgba(255,90,31,.16);
-  }
-
-  .chip-float {
-    position: absolute; z-index: 3;
-    display: none; align-items: center; gap: 9px;
-    padding: 7px 15px 7px 7px;
-    border-radius: 999px;
-    background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,255,255,.15);
-    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
-    color: #fff;
-    font-size: 13px; font-weight: 600;
-    white-space: nowrap;
-    box-shadow: 0 12px 30px -12px rgba(0,0,0,.6);
-    animation: floaty 6s ease-in-out infinite;
-  }
-
-  .chip-ico {
-    width: 28px; height: 28px; border-radius: 50%;
-    display: grid; place-items: center;
-    background: var(--sun-grad);
-    font-weight: 800; font-size: 14px;
-  }
-
-  .chip-ico svg { width: 15px; height: 15px; fill: none; stroke: #fff; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-
-  /* parked just outside the orbit ring so the icons never pass under them */
-  .chip-a { right: calc(50% + 330px); bottom: 40px; }
-  .chip-b { left:  calc(50% + 330px); bottom: 120px; animation-delay: -2s; }
-  .chip-c { right: calc(50% + 300px); bottom: 210px; animation-delay: -4s; }
-
-  /* ================= SECTIONS ================= */
-
-  .section { position: relative; padding: 76px 0; }
-  .section.tint { background: var(--bg-tint); }
-
-  .section-head { max-width: 680px; margin-bottom: 38px; }
-  .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
-
-  .eyebrow {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 11.5px; font-weight: 700;
-    letter-spacing: .12em; text-transform: uppercase;
-    color: var(--brand-ink);
-    background: var(--brand-tint);
-    border: 1px solid var(--brand-line);
-    border-radius: 999px;
-    padding: 6px 13px 6px 10px;
     margin-bottom: 16px;
   }
 
-  .eyebrow::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--sun-grad); }
-
-  h2 {
-    font-size: clamp(29px, 6.2vw, 46px);
-    line-height: 1.08;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    text-wrap: balance;
-  }
-
-  .lead {
-    font-size: 16.5px; line-height: 1.7;
+  .sub {
+    font-size: 17px; line-height: 1.55;
     color: var(--ink-soft);
-    margin-top: 14px;
+    max-width: 420px;
+    margin: 0 auto 32px;
     text-wrap: pretty;
   }
 
-  /* scroll reveal — app.js adds .reveal only to blocks below the fold */
-  .reveal { opacity: 0; translate: 0 26px; transition: opacity .8s var(--ease), translate .8s var(--ease); transition-delay: var(--d, 0s); }
-  .reveal.in { opacity: 1; translate: none; }
+  /* ---------- CTA ---------- */
 
-  /* ---------- clients ---------- */
-
-  .clients {
-    background:
-      radial-gradient(720px 260px at 50% 0%, rgba(255,150,50,.17), transparent 70%),
-      var(--bg);
+  .cta-group {
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
   }
 
-  .client-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px 14px;
-    max-width: 640px;
-    margin: 0 auto;
-  }
-
-  .client-item:only-child { grid-column: 1 / -1; width: 100%; max-width: 300px; justify-self: center; }
-
-  /* odd count on phones: centre the last card */
-  .client-item:last-child:nth-child(odd):not(:only-child) { grid-column: 1 / -1; width: calc(50% - 7px); justify-self: center; }
-
-  .client-card {
-    background: #fff;
-    border: 4px solid #fff;
-    border-radius: 24px;
-    overflow: hidden;
-    box-shadow: 0 1px 2px rgba(26,21,35,.06), 0 24px 44px -18px rgba(26,21,35,.38);
-    rotate: -1.6deg;
-    transition: rotate .45s var(--ease), transform .45s var(--ease), box-shadow .45s var(--ease);
-  }
-
-  .client-item:nth-child(even) .client-card { rotate: 1.6deg; }
-
-  .client-card:hover { rotate: 0deg; transform: translateY(-4px); box-shadow: 0 1px 2px rgba(26,21,35,.06), 0 30px 54px -18px rgba(26,21,35,.42); }
-
-  .client-media {
-    position: relative;
-    isolation: isolate;
-    aspect-ratio: 4 / 5;
-    border-radius: 20px;
-    overflow: hidden;
-    background:
-      radial-gradient(circle at 25% 15%, rgba(255,240,200,.55), transparent 45%),
-      linear-gradient(160deg, #FFB547 0%, #FF8A00 45%, #FF5A1F 100%);
-    display: grid; place-items: center;
-  }
-
-  .client-initials {
-    font-size: clamp(42px, 13vw, 76px);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    color: rgba(255,255,255,.96);
-    text-shadow: 0 8px 26px rgba(130,40,0,.35);
-    margin-bottom: 18%;
-  }
-
-  .client-media img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: 50% 22%;
-    transition: scale .7s var(--ease);
-  }
-
-  .client-card:hover .client-media img { scale: 1.045; }
-
-  .client-media::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(18,12,28,.9) 0%, rgba(18,12,28,.4) 34%, rgba(18,12,28,0) 58%);
-    pointer-events: none;
-  }
-
-  .client-badge {
-    position: absolute; top: 10px; left: 10px; z-index: 2;
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 4px 9px 4px 4px;
-    border-radius: 999px;
-    background: rgba(255,255,255,.95);
-    color: var(--ink);
-    font-size: 11px; font-weight: 700;
-    box-shadow: 0 4px 12px rgba(0,0,0,.14);
-  }
-
-  .client-badge::before {
-    content: '';
-    width: 16px; height: 16px; border-radius: 50%;
-    background:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E") center/10px no-repeat,
-      var(--sun-grad);
-  }
-
-  .client-meta { position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 2; color: #fff; }
-
-  .client-name { font-size: 17px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.2; }
-  .client-place { font-size: 12.5px; color: rgba(255,255,255,.78); margin-top: 2px; }
-
-  .client-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
-
-  .client-tags span {
-    font-size: 10.5px; font-weight: 700;
-    padding: 4px 8px;
-    border-radius: 999px;
-    background: rgba(255,255,255,.16);
-    border: 1px solid rgba(255,255,255,.24);
-    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-  }
-
-  .client-quote { padding: 14px 10px 10px; font-size: 13.5px; line-height: 1.55; color: var(--ink-soft); }
-
-  .section-cta { text-align: center; margin-top: 44px; }
-
-  .section-cta-label { font-size: 15px; font-weight: 700; color: var(--ink-soft); margin-bottom: 14px; }
-
-  .section-cta-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
-
-  .btn-chat-outline {
-    display: inline-flex; align-items: center; gap: 10px;
-    padding: 13px 22px 13px 16px;
-    border-radius: 999px;
-    border: 1.5px solid;
-    font-size: 15px; font-weight: 700;
-    text-decoration: none;
-    transition: background .2s, transform .2s var(--ease), border-color .2s;
-  }
-
-  .btn-chat-outline:hover { transform: translateY(-2px); }
-
-  .btn-chat-outline.is-tg { border-color: rgba(34,158,217,.3); background: #EEF8FE; color: #146BA6; }
-  .btn-chat-outline.is-tg svg { fill: var(--tg-2); }
-  .btn-chat-outline.is-tg:hover { background: #DCF0FC; color: #0F5A8C; border-color: rgba(34,158,217,.5); }
-  .btn-chat-outline.is-tg:focus-visible { outline: 3px solid var(--tg); outline-offset: 3px; }
-
-  .btn-chat-outline.is-wa { border-color: rgba(18,140,78,.3); background: #F0FDF4; color: #0F7A43; }
-  .btn-chat-outline.is-wa svg { fill: var(--wa-3); }
-  .btn-chat-outline.is-wa:hover { background: #DCFCE7; color: #0B6536; border-color: rgba(18,140,78,.5); }
-  .btn-chat-outline.is-wa:focus-visible { outline: 3px solid var(--wa); outline-offset: 3px; }
-
-  /* ---------- problem vs solution ---------- */
-
-  .compare { position: relative; display: grid; gap: 0; }
-
-  .compare-card { position: relative; overflow: hidden; border-radius: 26px; padding: 30px 24px; }
-
-  .compare-card h3 { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 20px; }
-
-  .compare-card.bad { background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-sm); }
-
-  .compare-card.good { background: var(--night); color: #fff; box-shadow: 0 34px 60px -24px rgba(18,12,28,.55); isolation: isolate; }
-
-  .compare-card.good::before {
-    content: '';
-    position: absolute; inset: 0; z-index: -1;
-    background:
-      radial-gradient(420px 280px at 100% 0%, rgba(255,138,0,.34), transparent 70%),
-      radial-gradient(360px 260px at 0% 100%, rgba(124,58,237,.22), transparent 70%);
-  }
-
-  .x-list, .tick-list { list-style: none; display: grid; gap: 14px; }
-
-  .x-list li, .tick-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 15.5px; line-height: 1.5; }
-
-  .x-list li { color: var(--ink-soft); }
-  .tick-list li { color: rgba(255,255,255,.86); }
-
-  .x-list li::before, .tick-list li::before { content: ''; flex: none; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%; }
-
-  .x-list li::before {
-    background: #FDECEC url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23DC4A4A' stroke-width='3.2' stroke-linecap='round'%3E%3Cpath d='M7 7l10 10M17 7L7 17'/%3E%3C/svg%3E") center/12px no-repeat;
-  }
-
-  .tick-list li::before {
-    background:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E") center/13px no-repeat,
-      var(--sun-grad);
-  }
-
-  .compare-arrow {
-    position: relative; z-index: 2;
-    justify-self: center;
-    width: 50px; height: 50px;
-    margin: -14px 0;
-    border-radius: 50%;
-    background: var(--sun-grad);
-    border: 4px solid var(--bg-tint);
-    display: grid; place-items: center;
-    box-shadow: 0 10px 24px -8px rgba(255,110,20,.6);
-    rotate: 90deg;
-  }
-
-  .compare-arrow svg { width: 20px; height: 20px; }
-
-  .compare.is-single .compare-arrow { display: none; }
-
-  /* ---------- services ---------- */
-
-  .bento { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-
-  .svc {
-    position: relative; overflow: hidden;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 20px;
-    padding: 18px 15px;
-    box-shadow: var(--shadow-sm);
-    transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s;
-  }
-
-  .svc:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--brand-line); }
-
-  .svc-icon {
-    width: 40px; height: 40px;
-    border-radius: 12px;
-    background: var(--sun-grad);
-    display: grid; place-items: center;
-    margin-bottom: 14px;
-    box-shadow: 0 8px 18px -6px rgba(255,110,20,.55);
-  }
-
-  .svc-icon svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-
-  .svc h3 { font-size: 15px; font-weight: 700; line-height: 1.3; letter-spacing: -0.01em; margin-bottom: 6px; }
-  .svc p  { font-size: 13.3px; line-height: 1.55; color: var(--ink-faint); }
-
-  .svc-featured {
-    grid-column: span 2;
-    padding: 24px 22px;
-    background: linear-gradient(155deg, #FFF1E4 0%, #FFFFFF 62%);
-    border-color: var(--brand-line);
-  }
-
-  .svc-featured::after {
-    content: '';
-    position: absolute; right: -50px; top: -50px;
-    width: 170px; height: 170px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,160,60,.28), transparent 70%);
-    pointer-events: none;
-  }
-
-  .svc-featured .svc-icon { width: 48px; height: 48px; border-radius: 14px; }
-  .svc-featured .svc-icon svg { width: 23px; height: 23px; }
-  .svc-featured h3 { font-size: 18px; margin-bottom: 8px; }
-  .svc-featured p  { font-size: 14.5px; color: var(--ink-soft); max-width: 420px; }
-
-  .fine { margin-top: 22px; font-size: 14px; color: var(--ink-faint); text-align: center; }
-
-  /* ---------- steps ---------- */
-
-  .steps { list-style: none; display: grid; gap: 16px; }
-
-  .step {
-    position: relative;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 22px;
-    padding: 24px 22px;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .step:not(:last-child)::after {
-    content: '';
-    position: absolute; left: 44px; bottom: -17px;
-    width: 2px; height: 18px;
-    background: repeating-linear-gradient(180deg, var(--sun-3) 0 5px, transparent 5px 9px);
-  }
-
-  .step-num {
-    display: block;
-    font-size: 44px; font-weight: 800; line-height: 1; letter-spacing: -0.04em;
-    background: var(--sun-grad);
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent; color: transparent;
-    margin-bottom: 14px;
-  }
-
-  .step h3 { font-size: 18px; font-weight: 800; letter-spacing: -0.015em; margin-bottom: 8px; }
-  .step p  { font-size: 14.5px; line-height: 1.6; color: var(--ink-soft); }
-
-  /* ---------- industries ---------- */
-
-  .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 840px; margin: 0 auto; }
-
-  .chip {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 14px; font-weight: 600;
-    color: var(--ink);
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 10px 16px 10px 13px;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .chip::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--sun-grad); }
-
-  /* ---------- faq ---------- */
-
-  .faq { display: grid; gap: 10px; max-width: 780px; margin: 0 auto; }
-
-  .faq details {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    box-shadow: var(--shadow-sm);
-    transition: border-color .2s, box-shadow .2s;
-  }
-
-  .faq details[open] { border-color: var(--brand-line); box-shadow: var(--shadow-md); }
-
-  .faq summary {
-    padding: 18px 18px 18px 20px;
-    font-size: 16px; font-weight: 700; line-height: 1.4;
-    cursor: pointer;
-    list-style: none;
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  }
-
-  .faq summary::-webkit-details-marker { display: none; }
-  .faq summary:focus-visible { outline: 3px solid var(--sun-3); outline-offset: 2px; border-radius: 18px; }
-
-  .faq summary::after {
-    content: '';
-    flex: none;
-    width: 30px; height: 30px; border-radius: 50%;
-    background: var(--brand-tint) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C2410C' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/15px no-repeat;
-    transition: rotate .3s var(--ease);
-  }
-
-  .faq details[open] summary::after { rotate: 45deg; }
-
-  .faq details p { padding: 0 20px 20px; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
-
-  /* ---------- closing CTA ---------- */
-
-  .closing {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-    border-radius: 32px;
-    background: var(--night);
+  .cta {
+    display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+    width: 100%; max-width: 400px;
+    background: linear-gradient(135deg, var(--tg), var(--tg-deep));
     color: #fff;
-    text-align: center;
-    padding: 54px 22px 130px;
-  }
-
-  .closing::before {
-    content: '';
-    position: absolute; left: 50%; bottom: -330px; z-index: -1;
-    width: 900px; height: 900px;
-    translate: -50% 0;
-    border-radius: 50%;
-    background: repeating-conic-gradient(from 0deg, rgba(255,196,110,.16) 0deg 2.5deg, transparent 2.5deg 12deg);
-    -webkit-mask-image: radial-gradient(circle closest-side, #000 18%, transparent 80%);
-            mask-image: radial-gradient(circle closest-side, #000 18%, transparent 80%);
-    animation: spin 160s linear infinite;
-  }
-
-  .closing::after {
-    content: '';
-    position: absolute; left: 50%; bottom: -150px; z-index: -1;
-    width: 240px; height: 240px;
-    translate: -50% 0;
-    border-radius: 50%;
-    background: radial-gradient(circle at 50% 38%, #FFF4CC 0%, #FFD66B 24%, #FFB547 46%, #FF8A00 74%, #FF5A1F 100%);
-    box-shadow: 0 0 60px 20px rgba(255,150,40,.45), 0 0 180px 70px rgba(255,90,31,.25);
-  }
-
-  .closing .avatars { justify-content: center; margin-bottom: 20px; }
-  .closing .avatar { width: 48px; height: 48px; font-size: 15px; border-width: 3px; }
-
-  .closing h2 { color: #fff; }
-
-  .closing p.closing-text {
-    font-size: 16.5px; line-height: 1.65;
-    color: rgba(255,255,255,.76);
-    max-width: 540px;
-    margin: 14px auto 30px;
-  }
-
-  .closing .note { margin-top: 14px; }
-
-  /* ---------- contact ---------- */
-
-  .contact { display: grid; gap: 12px; }
-
-  .contact-row {
-    display: flex; align-items: center; gap: 14px;
-    min-width: 0;
-    padding: 16px 18px;
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    color: var(--ink);
+    font-family: inherit;
+    font-size: 19px; font-weight: 700;
+    padding: 20px 28px;
+    border: 0;
+    border-radius: 16px;
     text-decoration: none;
-    box-shadow: var(--shadow-sm);
-    transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s;
+    cursor: pointer;
+    box-shadow: 0 12px 30px rgba(34,158,217,0.35);
+    animation: pulseTg 2.2s infinite;
+    transition: transform .15s ease, box-shadow .15s ease;
   }
 
-  .contact-row:hover { color: var(--ink); transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--brand-line); }
-
-  .contact-icon {
-    flex: none;
-    width: 44px; height: 44px;
-    border-radius: 13px;
-    background: var(--brand-tint);
-    display: grid; place-items: center;
+  .cta-wa {
+    background: linear-gradient(135deg, var(--wa), var(--wa-deep));
+    box-shadow: 0 12px 30px rgba(37,211,102,0.35);
+    animation: none;
   }
 
-  .contact-icon svg { width: 20px; height: 20px; stroke: var(--brand-ink); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .cta:hover  { color: #fff; transform: translateY(-2px); }
+  .cta:active { transform: translateY(0) scale(.99); }
 
-  .contact-row.is-tg .contact-icon { background: #E6F4FD; }
-  .contact-row.is-tg .contact-icon svg { stroke: var(--tg-3); }
-  .contact-row.is-wa .contact-icon { background: #E6F8EE; }
-  .contact-row.is-wa .contact-icon svg { stroke: var(--wa-3); }
+  .cta:focus-visible {
+    outline: 3px solid var(--sun-deep);
+    outline-offset: 3px;
+  }
 
-  .contact-row > span:last-child { min-width: 0; }
+  .cta svg { flex: none; }
 
-  .contact-row strong {
-    display: block;
-    font-size: 11px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: .07em;
+  .note {
+    font-size: 13px;
     color: var(--ink-faint);
-    margin-bottom: 2px;
+    margin-top: 16px;
+    min-height: 20px;
   }
 
-  .contact-value { display: block; font-size: 15px; font-weight: 600; overflow-wrap: anywhere; }
+  .note.is-active { color: var(--sun-deep); font-weight: 600; }
+
+  .fallback {
+    font-size: 13px; font-weight: 600;
+    color: var(--ink-soft);
+    margin-top: 10px;
+    display: none;
+  }
+
+  .fallback.is-visible { display: block; animation: floatUp .35s ease both; }
+
+  /* ---------- trust row ---------- */
+
+  .trust {
+    display: flex; align-items: center; justify-content: center;
+    gap: 26px;
+    margin-top: 44px;
+    flex-wrap: wrap;
+  }
+
+  .stat-value { font-size: 24px; font-weight: 800; color: var(--ink); }
+
+  .stat-label {
+    font-size: 12px; font-weight: 600;
+    color: #8A7F86;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+  }
 
   /* ---------- footer ---------- */
 
   .footer {
-    border-top: 1px solid var(--line);
-    padding: 38px 0 calc(110px + env(safe-area-inset-bottom));
+    margin-top: auto;
+    padding-top: 40px;
+    font-size: 12px;
+    color: var(--ink-ghost);
     text-align: center;
-    font-size: 13px;
-    line-height: 1.9;
-    color: var(--ink-faint);
+    line-height: 1.7;
   }
 
-  .footer-brand { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-  .footer-brand .brand-logo, .footer-brand .brand-mark { width: 32px; height: 32px; }
-  .footer-brand .brand-name { color: var(--ink); font-size: 18px; }
+  .footer a { color: var(--ink-faint); text-decoration: none; }
+  .footer a:hover { color: var(--sun-deep); text-decoration: underline; }
 
-  .footer a { color: var(--ink-soft); text-decoration: none; }
-  .footer a:hover { color: var(--brand-ink); text-decoration: underline; }
-  .footer .sep { opacity: .5; margin: 0 7px; }
+  .footer .sep { opacity: .5; margin: 0 6px; }
 
-  /* ---------- sticky chat bar ---------- */
+  /* ---------- motion ---------- */
 
-  .sticky-cta {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
-    display: flex; justify-content: center; gap: 10px;
-    padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
-    background: linear-gradient(to top, rgba(255,255,255,.97) 55%, rgba(255,255,255,0));
-    translate: 0 120%;
-    visibility: hidden;
-    transition: translate .4s var(--ease), visibility 0s linear .4s;
+  @keyframes pulseTg {
+    0%   { box-shadow: 0 0 0 0 rgba(34,158,217,0.45); }
+    70%  { box-shadow: 0 0 0 18px rgba(34,158,217,0); }
+    100% { box-shadow: 0 0 0 0 rgba(34,158,217,0); }
   }
 
-  .sticky-cta.is-visible { translate: none; visibility: visible; transition: translate .4s var(--ease), visibility 0s; }
-
-  .sticky-cta .cta { flex: 1 1 0; min-width: 0; max-width: 260px; gap: 10px; padding: 8px 12px 8px 8px; border-radius: 16px; }
-  .sticky-cta .cta::after { animation: none; }
-  .sticky-cta .cta-icon { width: 38px; height: 38px; border-radius: 11px; }
-  .sticky-cta .cta-label { font-size: 16px; }
-
-  /* ================= MOTION ================= */
-
-  @keyframes rise {
-    from { opacity: 0; translate: 0 18px; }
-    to   { opacity: 1; translate: none; }
-  }
-
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  @keyframes floaty {
-    0%, 100% { translate: 0 0; }
-    50%      { translate: 0 -8px; }
-  }
-
-  @keyframes shine {
-    0%        { transform: translateX(-160%) skewX(-18deg); }
-    35%, 100% { transform: translateX(330%) skewX(-18deg); }
-  }
-
-  @keyframes ctaPulse {
-    0%   { box-shadow: 0 0 0 0 rgba(var(--glow),.5); }
-    70%  { box-shadow: 0 0 0 16px rgba(var(--glow),0); }
-    100% { box-shadow: 0 0 0 0 rgba(var(--glow),0); }
-  }
-
-  @keyframes livePulse {
-    0%   { box-shadow: 0 0 0 0 rgba(37,211,102,.6); }
-    70%  { box-shadow: 0 0 0 7px rgba(37,211,102,0); }
-    100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
-  }
-
-  @keyframes dotPulse {
-    0%   { box-shadow: 0 0 0 0 rgba(255,181,71,.7); }
-    70%  { box-shadow: 0 0 0 7px rgba(255,181,71,0); }
-    100% { box-shadow: 0 0 0 0 rgba(255,181,71,0); }
+  @keyframes floatUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
     *, *::before, *::after {
       animation-duration: .001ms !important;
       animation-iteration-count: 1 !important;
@@ -1043,73 +263,18 @@
     }
   }
 
-  /* ================= LARGER SCREENS ================= */
+  /* ---------- small screens ---------- */
 
-  @media (min-width: 760px) {
-    .container { padding: 0 32px; }
-    .section { padding: 104px 0; }
-    .section-head { margin-bottom: 48px; }
-
-    .client-grid { grid-template-columns: repeat(auto-fit, minmax(0, 290px)); justify-content: center; gap: 30px; max-width: none; }
-    .client-item:last-child:nth-child(odd):not(:only-child) { grid-column: auto; width: auto; justify-self: stretch; }
-    .client-name { font-size: 20px; }
-    .client-meta { left: 16px; right: 16px; bottom: 16px; }
-
-    .compare { grid-template-columns: 1fr 1fr; gap: 28px; align-items: stretch; }
-    .compare.is-single { grid-template-columns: minmax(0, 620px); justify-content: center; }
-    .compare-card { padding: 38px 34px; }
-    .compare-arrow { position: absolute; left: 50%; top: 50%; margin: 0; translate: -50% -50%; rotate: 0deg; }
-
-    .steps { grid-template-columns: repeat(3, 1fr); gap: 22px; }
-    .step { padding: 30px 26px; }
-    .step:not(:last-child)::after {
-      left: auto; bottom: auto; right: -23px; top: 50px;
-      width: 24px; height: 2px;
-      background: repeating-linear-gradient(90deg, var(--sun-3) 0 5px, transparent 5px 9px);
-    }
-
-    .contact { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-
-    .closing { padding: 72px 40px 150px; }
-
-    .footer { padding-bottom: calc(40px + env(safe-area-inset-bottom)); }
-
-    /* floating bubbles instead of a full-width bar */
-    .sticky-cta { left: auto; right: 24px; bottom: 24px; padding: 0; background: none; flex-direction: column; align-items: stretch; }
-    .sticky-cta .cta { flex: none; width: auto; padding: 8px 18px 8px 8px; border-radius: 999px; box-shadow: 0 18px 40px -10px rgba(var(--glow),.55); }
-    .sticky-cta .cta-icon { border-radius: 50%; }
-  }
-
-  @media (min-width: 960px) {
-    .hero-inner { padding-top: 70px; }
-    .hero-meta { flex-direction: row; justify-content: center; gap: 30px; margin-top: 30px; }
-    .hero-meta > .trust { padding-left: 30px; border-left: 1px solid rgba(255,255,255,.13); }
-    .stat-value { font-size: 19px; }
-
-    .sunrise { --orbit: 640px; --tile: 58px; margin-top: 36px; }
-
-    .bento { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
-    .svc { padding: 22px 20px; }
-    .svc-featured { padding: 30px 28px; }
-  }
-
-  @media (min-width: 1200px) {
-    .chip-float { display: inline-flex; }
-  }
-
-  /* "Surya Sports Media" + the online pill must share one row on small phones */
   @media (max-width: 420px) {
-    .brand { gap: 8px; }
-    .brand-logo, .brand-mark { width: 32px; height: 32px; }
-    .topbar .brand-name { font-size: 16px; }
-    .status-pill { padding: 5px 10px; font-size: 11.5px; gap: 6px; }
+    .trust { gap: 18px; }
+    .stat-value { font-size: 21px; }
   }
 
-  @media (max-width: 370px) {
-    .container { padding: 0 16px; }
-    .cta-label { font-size: 16.5px; }
-    .cta-arrow { display: none; }
-    .trust > div { padding: 0 9px; }
+  @media (max-width: 380px) {
+    h1  { font-size: 32px; }
+    .sub { font-size: 16px; }
+    .cta { font-size: 17px; padding: 18px 22px; }
+    .trust { gap: 18px; }
   }
 </style>
 
@@ -1134,286 +299,57 @@ src="https://www.facebook.com/tr?id=4029597787337053&ev=PageView&noscript=1"
 </head>
 
 <body>
+<div class="page">
 
-<!-- ============ HERO ============ -->
-
-<header class="hero" id="top">
-  <div class="hero-bg" aria-hidden="true"></div>
-
-  <div class="container topbar">
-    <a class="brand" href="#top">
-      <img class="brand-logo" id="brandLogo" src="assets/surya-mark.svg" alt="" width="36" height="36">
-      <span class="brand-mark" id="brandMark" aria-hidden="true">S</span>
-      <span class="brand-name" id="brandName">Surya Sports <span class="rev">Media</span></span>
-    </a>
+  <div class="shell topbar">
+    <div class="brand">
+      <div class="brand-mark" id="brandMark" aria-hidden="true">S</div>
+      <span class="brand-name" id="brandName">Surya Sports Media</span>
+    </div>
     <span class="status-pill" id="onlineLabel">Online now</span>
   </div>
 
-  <div class="container hero-inner">
+  <main class="shell hero">
 
-    <div class="badge rise" style="--d:.05s">
+    <div class="badge">
       <span class="badge-dot" aria-hidden="true"></span>
-      <span id="badge">Free consultation · Replies in under 5 min</span>
+      <span id="badge">Replies in minutes</span>
     </div>
 
-    <h1 class="rise" style="--d:.12s" id="headline">Ads that bring <span class="accent">real customers</span>, not just likes</h1>
+    <h1 id="headline">Get more customers from your ads</h1>
 
-    <p class="sub rise" style="--d:.2s" id="subheadline">
-      Surya Sports Media plans, creates and manages your Google, Facebook &amp; Instagram ads with
-      AI-driven targeting — so every rupee you spend works harder.
+    <p class="sub" id="subheadline">
+      Tap a button below to chat with us directly. No forms, no waiting — just a quick message and we'll take it from there.
     </p>
 
-    <div class="rise" style="--d:.28s">
-      <div class="cta-group" id="cta">
-        <a class="cta" data-tg href="#" rel="noopener nofollow">
-          <span class="cta-shine" aria-hidden="true"></span>
-          <span class="cta-icon" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-          </span>
-          <span class="cta-text">
-            <span class="cta-label" data-label="tg">Chat with us on Telegram</span>
-            <span class="cta-sub" data-sub>Free consultation · No obligation</span>
-          </span>
-          <span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </a>
-        <a class="cta cta-wa" data-wa href="#" rel="noopener nofollow">
-          <span class="cta-shine" aria-hidden="true"></span>
-          <span class="cta-icon" aria-hidden="true">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          </span>
-          <span class="cta-text">
-            <span class="cta-label" data-label="wa">Chat with us on WhatsApp</span>
-            <span class="cta-sub" data-sub>Free consultation · No obligation</span>
-          </span>
-          <span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-        </a>
-      </div>
+    <div class="cta-group">
+      <a class="cta" id="tgCta" href="#" rel="noopener nofollow" aria-label="Chat with us on Telegram">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true" focusable="false"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.230.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.830-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        <span id="tgCtaLabel">Chat with us on Telegram</span>
+      </a>
 
-      <p class="note" id="note" role="status" aria-live="polite">Pick Telegram or WhatsApp · No spam, ever</p>
-      <p class="fallback" id="fallback">Didn't open automatically? Tap one of the buttons above.</p>
+      <a class="cta cta-wa" id="waCta" href="#" rel="noopener nofollow" aria-label="Chat with us on WhatsApp">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        <span id="waCtaLabel">Chat with us on WhatsApp</span>
+      </a>
     </div>
 
-    <div class="hero-meta rise" style="--d:.36s">
-      <div class="proof" id="heroProof" hidden>
-        <div class="avatars" id="heroAvatars"></div>
-        <p class="proof-text" id="heroProofText"></p>
-      </div>
-      <div class="trust" id="trust" hidden></div>
-    </div>
+    <p class="note" id="note" role="status" aria-live="polite">Free consultation · No spam, ever</p>
+    <p class="fallback" id="fallback">Didn't open automatically? Tap one of the buttons above.</p>
 
-  </div>
+    <div class="trust" id="trust" hidden></div>
 
-  <!-- decorative: the sun rising with the ad platforms orbiting it -->
-  <div class="sunrise" aria-hidden="true">
-    <div class="chip-float chip-a"><span class="chip-ico"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><span data-chip="0">More qualified leads</span></div>
-    <div class="chip-float chip-b"><span class="chip-ico">₹</span><span data-chip="1">Higher ROI on ad spend</span></div>
-    <div class="chip-float chip-c"><span class="chip-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.5"/></svg></span><span data-chip="2">AI-optimized targeting</span></div>
+  </main>
 
-    <div class="orbit">
-      <div class="rays"></div>
-      <div class="ring ring-1"></div>
-      <div class="ring ring-2"></div>
-      <div class="orbit-track">
-        <div class="orbit-slot" style="--a:210deg"><div class="orbit-icon ic-fb"><svg viewBox="0 0 24 24"><path fill="#fff" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1z"/></svg></div></div>
-        <div class="orbit-slot" style="--a:270deg"><div class="orbit-icon ic-ig"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="#fff" stroke="none"/></svg></div></div>
-        <div class="orbit-slot" style="--a:330deg"><div class="orbit-icon ic-g"><svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg></div></div>
-        <div class="orbit-slot" style="--a:30deg"><div class="orbit-icon ic-yt"><svg viewBox="0 0 24 24"><rect x="2" y="5.5" width="20" height="13" rx="4" fill="#FF0000"/><path d="M10 9.2v5.6l4.9-2.8z" fill="#fff"/></svg></div></div>
-        <div class="orbit-slot" style="--a:90deg"><div class="orbit-icon ic-in"><svg viewBox="0 0 24 24"><path fill="#fff" d="M6.9 9.5H4.1V20h2.8V9.5zM5.5 4a1.6 1.6 0 1 0 0 3.2A1.6 1.6 0 0 0 5.5 4zM20 13.9c0-2.8-1.5-4.6-4-4.6-1.3 0-2.3.7-2.8 1.5V9.5h-2.7V20h2.8v-5.5c0-1.4.6-2.4 1.9-2.4 1.2 0 1.9.9 1.9 2.4V20H20v-6.1z"/></svg></div></div>
-        <div class="orbit-slot" style="--a:150deg"><div class="orbit-icon ic-wa"><svg viewBox="0 0 24 24"><path fill="#fff" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></div></div>
-      </div>
-      <div class="sun"></div>
-    </div>
-  </div>
-</header>
+  <footer class="footer">
+    <span id="footerNote">Chat with us on Telegram or WhatsApp</span> ·
+    <span id="footerBrand">Surya Sports Media</span>
+    <br>
+    <a id="privacyLink" href="privacy.html">Privacy Policy</a>
+    <span class="sep">·</span>
+    <a id="termsLink" href="terms.html">Terms</a>
+  </footer>
 
-<main>
-
-  <!-- ============ CLIENTS ============ -->
-
-  <section class="section clients" id="clientsSection" hidden>
-    <div class="container">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">Our clients</span>
-        <h2 id="clientsTitle">Real clients. <span class="accent">Real work.</span></h2>
-        <p class="lead" id="clientsNote"></p>
-      </div>
-      <div class="client-grid" id="clientGrid"></div>
-      <div class="section-cta" data-reveal>
-        <p class="section-cta-label" id="clientsCtaLabel">Want to be next? Chat with us</p>
-        <div class="section-cta-row">
-          <a class="btn-chat-outline is-tg" data-tg href="#" rel="noopener nofollow">
-            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-            <span>Telegram</span>
-          </a>
-          <a class="btn-chat-outline is-wa" data-wa href="#" rel="noopener nofollow">
-            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-            <span>WhatsApp</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PROBLEM vs SOLUTION ============ -->
-
-  <section class="section tint" id="compareSection" hidden>
-    <div class="container">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">The problem</span>
-        <h2 id="compareTitle">Running ads shouldn't feel like <span class="accent">burning money</span></h2>
-      </div>
-      <div class="compare" id="compare">
-        <div class="compare-card bad" id="problemsCard" data-reveal>
-          <h3 id="problemsTitle">Sound familiar?</h3>
-          <ul class="x-list" id="problemsList"></ul>
-        </div>
-        <div class="compare-arrow" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </div>
-        <div class="compare-card good dark" id="benefitsCard" data-reveal style="--d:.12s">
-          <h3 id="benefitsTitle">With Surya Sports Media, you get</h3>
-          <ul class="tick-list" id="benefitsList"></ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ SERVICES ============ -->
-
-  <section class="section" id="servicesSection" hidden>
-    <div class="container">
-      <div class="section-head" data-reveal>
-        <span class="eyebrow">Our services</span>
-        <h2 id="servicesTitle">Everything you need to <span class="accent">grow online</span></h2>
-        <p class="lead" id="aboutText"></p>
-      </div>
-      <div class="bento" id="servicesGrid"></div>
-      <p class="fine" id="servicesNote"></p>
-    </div>
-  </section>
-
-  <!-- ============ HOW IT WORKS ============ -->
-
-  <section class="section tint" id="stepsSection" hidden>
-    <div class="container">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">The process</span>
-        <h2 id="stepsTitle">Get started in <span class="accent">3 simple steps</span></h2>
-      </div>
-      <ol class="steps" id="stepsList"></ol>
-    </div>
-  </section>
-
-  <!-- ============ WHO IT'S FOR ============ -->
-
-  <section class="section" id="industriesSection" hidden>
-    <div class="container">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">Who it's for</span>
-        <h2 id="industriesTitle">Built for <span class="accent">every kind</span> of business</h2>
-      </div>
-      <div class="chips" id="industriesList" data-reveal></div>
-    </div>
-  </section>
-
-  <!-- ============ FAQ ============ -->
-
-  <section class="section tint" id="faqSection" hidden>
-    <div class="container">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">FAQ</span>
-        <h2 id="faqTitle">Questions? <span class="accent">Answered.</span></h2>
-      </div>
-      <div class="faq" id="faqList"></div>
-    </div>
-  </section>
-
-  <!-- ============ CLOSING CTA ============ -->
-
-  <section class="section" id="closingSection">
-    <div class="container">
-      <div class="closing dark" data-reveal>
-        <div class="avatars" id="closingAvatars" hidden></div>
-        <h2 id="closingTitle">Ready to <span class="accent">grow</span> your business?</h2>
-        <p class="closing-text" id="closingText">Send us one message on Telegram or WhatsApp. We'll analyze your current digital presence and show you exactly where growth opportunities exist — no obligation.</p>
-        <div class="cta-group" id="ctaAlt">
-          <a class="cta" data-tg href="#" rel="noopener nofollow">
-            <span class="cta-shine" aria-hidden="true"></span>
-            <span class="cta-icon" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-            </span>
-            <span class="cta-text">
-              <span class="cta-label" data-label="tg">Chat with us on Telegram</span>
-              <span class="cta-sub" data-sub>Free consultation · No obligation</span>
-            </span>
-            <span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
-          <a class="cta cta-wa" data-wa href="#" rel="noopener nofollow">
-            <span class="cta-shine" aria-hidden="true"></span>
-            <span class="cta-icon" aria-hidden="true">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-            </span>
-            <span class="cta-text">
-              <span class="cta-label" data-label="wa">Chat with us on WhatsApp</span>
-              <span class="cta-sub" data-sub>Free consultation · No obligation</span>
-            </span>
-            <span class="cta-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-          </a>
-        </div>
-        <p class="note" id="closingNote">Pick Telegram or WhatsApp · No spam, ever</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CONTACT ============ -->
-
-  <section class="section" id="contactSection" style="padding-top:0">
-    <div class="container">
-      <div class="section-head center" data-reveal>
-        <span class="eyebrow">Contact</span>
-        <h2>Get in <span class="accent">touch</span></h2>
-      </div>
-      <div class="contact" id="contactList"></div>
-    </div>
-  </section>
-
-</main>
-
-<footer class="footer">
-  <div class="container">
-    <div class="footer-brand">
-      <img class="brand-logo" id="footerLogo" src="assets/surya-mark.svg" alt="" width="32" height="32">
-      <span class="brand-mark" id="footerMark" aria-hidden="true">S</span>
-      <span class="brand-name" id="footerBrandName">Surya Sports <span class="rev">Media</span></span>
-    </div>
-    <p id="footerTagline">AI-Powered Digital Advertising Solutions</p>
-    <p>
-      <span id="footerNote">Chat with us on Telegram or WhatsApp</span>
-      <span class="sep">·</span>
-      <span>&copy; <span id="footerYear"></span> <span id="footerBrand">Surya Sports Media</span></span>
-    </p>
-    <p>
-      <a id="privacyLink" href="privacy.html">Privacy Policy</a>
-      <span class="sep">·</span>
-      <a id="termsLink" href="terms.html">Terms</a>
-    </p>
-  </div>
-</footer>
-
-<!-- sticky chat buttons — shown once the hero buttons scroll away -->
-<div class="sticky-cta" id="stickyCta">
-  <a class="cta" data-tg href="#" rel="noopener nofollow" aria-label="Chat with us on Telegram">
-    <span class="cta-icon" aria-hidden="true">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-    </span>
-    <span class="cta-text"><span class="cta-label">Telegram</span></span>
-  </a>
-  <a class="cta cta-wa" data-wa href="#" rel="noopener nofollow" aria-label="Chat with us on WhatsApp">
-    <span class="cta-icon" aria-hidden="true">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-    </span>
-    <span class="cta-text"><span class="cta-label">WhatsApp</span></span>
-  </a>
 </div>
 
 <script src="app.js"></script>

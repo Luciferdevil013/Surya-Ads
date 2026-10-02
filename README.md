@@ -1,68 +1,41 @@
 # Surya Sports Media — Telegram + WhatsApp Landing Page
 
-A high-converting Telegram + WhatsApp landing page for Surya Sports Media digital advertising services.
+A minimal, single-screen landing page that sends Meta ad traffic into a Telegram
+or WhatsApp chat. No build step, no dependencies — plain HTML/CSS/JS.
 
-## Features
+```
+index.html    the landing page
+config.js     ← the only file you normally edit
+app.js        link building, tracking, redirect
+legal.css     styling for the two legal pages
+privacy.html  privacy policy
+terms.html    terms of service
+robots.txt
+assets/       logo, favicon, share image
+```
 
-- **Telegram + WhatsApp** — Every call-to-action offers both: a Telegram chat with @suryasportsmedia and a WhatsApp chat, message pre-filled
-- **Mobile-First Design** — Optimized for all devices
-- **Sunrise Design** — Dark hero with a rising sun and orbiting ad-platform icons
-- **Client Showcase** — Photo cards of clients you've worked with, plus "Trusted by" avatars
-- **Sticky Chat Buttons** — Telegram and WhatsApp, appear once the main button scrolls away
-- **Configurable** — Edit only `config.js` to customize everything
-- **SEO Optimized** — Meta tags, Open Graph, and structured content
-- **Tracking Ready** — Meta Pixel and GA4 integration
-- **Legal Pages** — Privacy Policy and Terms of Service included
+## Run locally
 
-## Quick Setup
+```bash
+npm run dev
+```
 
-1. Edit `config.js` with your Telegram username, WhatsApp number and business details
-2. Add client photos to `assets/clients/` (see below)
-3. Open `index.html` in a browser to test (add `?noredirect=1` while testing)
-
-## Client photos
-
-The clients section reads the `clients` list in `config.js`. For each client,
-save a photo in `assets/clients/` with the file name from its `photo` path, e.g.
-`assets/clients/malik-mumbai.jpg`. Lowercase names, `.jpg` / `.jpeg` / `.png` /
-`.webp` all work, portrait (about 800 x 1000 px) looks best. Until a photo is
-added the card shows the client's initials.
-
-Only use photos you have permission to use (ideally ones the client gave you) —
-Meta may reject ads whose landing page shows public figures or other people's
-photos without consent.
+Then open http://localhost:5173/?noredirect=1
 
 ## Configuration
 
 All settings are in `config.js`:
 
-- `telegramUsername` — Telegram username the Telegram buttons open (currently `suryasportsmedia`)
-- `whatsappNumber` — WhatsApp number the WhatsApp buttons open, digits only with country code
+- `telegramUsername` — Telegram username the Telegram button opens ("" hides it)
+- `whatsappNumber` — WhatsApp number, digits only with country code ("" hides it)
 - `prefillMessage` — Message pre-filled in Telegram / WhatsApp
-- `autoRedirect` — Automatically redirect (to `redirectChannel`: `"telegram"` or `"whatsapp"`)
-- `metaPixelId` — Facebook Pixel ID for tracking
+- `autoRedirect` / `redirectChannel` — Optional automatic redirect to `"telegram"` or `"whatsapp"`
+- `metaPixelId` / `pixelClickEvent` — Meta Pixel and the event fired on a chat tap
 - `ga4Id` — Google Analytics 4 measurement ID
+- `badge`, `headline`, `subheadline`, button labels, `stats` — Page copy
 
-## Customization
-
-- **Brand Colors** — Edit CSS variables in `index.html`
-- **Content** — All text is configurable in `config.js`; wrap words in `*asterisks*` to highlight them
-- **Logo** — `assets/surya-mark.svg` (set `logoMark` in `config.js` to use another file)
-
-## File Structure
-
-```
-Surya-Ads/
-├── index.html          # Main landing page
-├── config.js           # All configuration (edit this!)
-├── app.js              # JavaScript runtime
-├── privacy.html        # Privacy Policy page
-├── terms.html          # Terms of Service page
-├── legal.css           # Legal page styles
-├── robots.txt          # Search engine directives
-└── assets/             # Logo, favicon, share image
-    └── clients/        # Client photos
-```
+The Meta Pixel base code is in the `<head>` of `index.html` — if you change
+pixels, update the ID there and in `config.js`.
 
 ## URL Parameters
 
