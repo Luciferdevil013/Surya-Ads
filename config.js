@@ -33,7 +33,7 @@ window.LP_CONFIG = {
 
   /* ============ TRACKING ============ */
 
-  // Meta (Facebook) Pixel (ID 1076329191902827) lives in the <head> of
+  // Meta (Facebook) Pixel (ID 3424514097720956) lives in the <head> of
   // index.html, together with the "Subscribe" event fired on a WhatsApp tap.
 
   // Google Analytics 4 measurement ID (e.g. "G-XXXXXXX") — leave "" to disable.
