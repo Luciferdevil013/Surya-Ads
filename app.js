@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------------
-   Telegram + WhatsApp Landing Page — runtime
+   WhatsApp Landing Page — runtime
    Builds the chat links, fires tracking, performs the (optional) redirect.
    Edit config.js, not this file.
    ------------------------------------------------------------------ */
@@ -11,13 +11,11 @@
 
   function el(id) { return document.getElementById(id); }
   function digitsOnly(s) { return String(s == null ? '' : s).replace(/[^0-9]/g, ''); }
-  function cleanUsername(s) { return String(s == null ? '' : s).trim().replace(/^@/, '').replace(/[^A-Za-z0-9_]/g, ''); }
   function param(name) { return C.allowUrlOverrides ? (params.get(name) || '') : ''; }
   function setText(id, value) { var n = el(id); if (n && value != null) n.textContent = value; }
 
   /* ---------------- contacts ---------------- */
 
-  var username = cleanUsername(param('u') || param('user') || C.telegramUsername);
   var phone = digitsOnly(param('n') || param('number') || C.whatsappNumber);
 
   /* ---------------- message ---------------- */
@@ -43,17 +41,8 @@
       .test(navigator.userAgent || '');
   }
 
-  // t.me/<username>?text=... and wa.me/<number>?text=... both open a direct
-  // chat with the message pre-typed.
+  // wa.me/<number>?text=... opens a direct chat with the message pre-typed.
   var CHANNELS = {
-    telegram: {
-      name: 'Telegram',
-      button: 'tgCta',
-      label: C.telegramButtonLabel,
-      link: username ? 'https://t.me/' + username + (text ? '?text=' + text : '') : '',
-      event: 'telegram_click',
-      id: username
-    },
     whatsapp: {
       name: 'WhatsApp',
       button: 'waCta',
@@ -66,21 +55,13 @@
 
   /* ---------------- tracking ---------------- */
 
-  // One event per channel per page view — a visitor who taps Telegram and
-  // then WhatsApp should count for both.
+  // One event per channel per page view. The Meta Pixel "Subscribe" event is
+  // fired by the pixel block in index.html, not here.
   var tracked = {};
 
   function fireTracking(ch) {
     if (tracked[ch.name]) return;
     tracked[ch.name] = true;
-
-    try {
-      if (window.fbq && C.metaPixelId && C.pixelClickEvent) {
-        window.fbq('track', C.pixelClickEvent, {
-          content_category: ch.name.toLowerCase()
-        });
-      }
-    } catch (e) { /* never block the redirect on a tracking error */ }
 
     try {
       if (window.gtag) {
@@ -184,8 +165,8 @@
     });
 
     if (!shown) {
-      setText('note', 'Setup needed: add your Telegram username or WhatsApp number in config.js');
-      console.warn('[landing] No chat configured — set telegramUsername or whatsappNumber in config.js');
+      setText('note', 'Setup needed: add your WhatsApp number in config.js');
+      console.warn('[landing] No chat configured — set whatsappNumber in config.js');
     }
 
     // Trust row
@@ -236,7 +217,7 @@
   render();
 
   var redirectDisabled = params.get('noredirect') === '1' || params.get('preview') === '1';
-  var redirectTo = CHANNELS[C.redirectChannel] || CHANNELS.telegram;
+  var redirectTo = CHANNELS.whatsapp;
 
   if (C.autoRedirect && redirectTo.link && !redirectDisabled) {
     setTimeout(function () { goToChat(redirectTo, false); },

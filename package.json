@@ -2,7 +2,7 @@
   "name": "surya-ads",
   "version": "1.0.0",
   "private": true,
-  "description": "Surya Sports Media — Telegram + WhatsApp landing page (static site)",
+  "description": "Surya Sports Media — WhatsApp landing page (static site)",
   "scripts": {
     "dev": "python3 -m http.server 5173",
     "start": "python3 -m http.server 5173"
