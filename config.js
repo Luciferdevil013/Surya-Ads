@@ -24,7 +24,7 @@ window.LP_CONFIG = {
 
   // Send the visitor to WhatsApp automatically, without them tapping.
   // Set to false if you want a pure click-through page (safer for ad review).
-  autoRedirect: true,
+  autoRedirect: false,
 
   // How long the landing page is visible before the auto-redirect fires (ms).
   // 2000 = 2 seconds. Keep this >= 1200 so the page is genuinely seen —
