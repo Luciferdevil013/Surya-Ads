@@ -1,353 +1,59 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Surya Sports Media — Chat on WhatsApp</title>
-<meta name="description" content="Message Surya Sports Media on WhatsApp for a free consultation. No forms, no waiting.">
-<meta name="robots" content="index, follow">
-<meta name="theme-color" content="#fff1e4">
-<meta name="format-detection" content="telephone=no">
-
-<!-- Open Graph / social preview (values are refreshed from config.js at runtime) -->
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Surya Sports Media">
-<meta property="og:title" content="Surya Sports Media — Chat on WhatsApp">
-<meta property="og:description" content="Message Surya Sports Media on WhatsApp for a free consultation. No forms, no waiting.">
-<meta property="og:image" content="assets/og-image.png?v=2">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="assets/og-image.png?v=2">
-
-<link rel="icon" type="image/svg+xml" href="assets/surya-mark.svg?v=2">
-<link rel="icon" type="image/png" href="assets/favicon.png?v=2">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png?v=2">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  :root {
-    --sun:          #EC6A2C;
-    --sun-deep:     #C2410C;
-    --sun-darker:   #9A3412;
-    --wa:           #25D366;
-    --wa-deep:      #128C4E;
-    --ink:          #1A1523;
-    --ink-soft:     #574F60;
-    --ink-faint:    #8E8697;
-    --ink-ghost:    #ADA6B4;
-    --line:         #FFE0C7;
-    --chip-bg:      #FFEBDC;
-  }
-
-  html { -webkit-text-size-adjust: 100%; }
-
-  body {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    color: var(--ink);
-    background: #FFF9F4;
-  }
-
-  a { color: var(--sun-deep); }
-  a:hover { color: var(--sun-darker); }
-
-  [hidden] { display: none !important; }
-
-  .page {
-    min-height: 100vh;
-    min-height: 100dvh;
-    background: radial-gradient(1200px 600px at 50% -10%, #FFF1E4 0%, #FFF9F4 45%, #FFFFFF 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 28px 20px calc(40px + env(safe-area-inset-bottom));
-  }
-
-  .shell { width: 100%; max-width: 520px; }
-
-  /* ---------- header ---------- */
-
-  .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 8vh;
-  }
-
-  .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
-
-  .brand-mark {
-    width: 38px; height: 38px;
-    flex: none;
-    border-radius: 11px;
-    background: linear-gradient(135deg, var(--sun), var(--sun-deep));
-    display: flex; align-items: center; justify-content: center;
-    color: #fff; font-weight: 800; font-size: 18px;
-    overflow: hidden;
-  }
-
-  .brand-mark.has-logo { background: none; }
-  .brand-mark img { width: 100%; height: 100%; display: block; }
-
-  .brand-name {
-    font-weight: 700; font-size: 17px;
-    color: var(--ink); letter-spacing: -0.01em;
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  }
-
-  .status-pill {
-    flex: none;
-    font-size: 12px; font-weight: 600;
-    color: var(--sun-deep);
-    background: var(--chip-bg);
-    padding: 6px 12px;
-    border-radius: 999px;
-  }
-
-  /* ---------- hero ---------- */
-
-  .hero { text-align: center; animation: floatUp .5s ease both; }
-
-  .badge {
-    display: inline-flex; align-items: center; gap: 7px;
-    background: #fff;
-    border: 1px solid var(--line);
-    padding: 7px 14px;
-    border-radius: 999px;
-    font-size: 13px; font-weight: 600;
-    color: #7C2D12;
-    box-shadow: 0 4px 16px rgba(236,106,44,0.08);
-    margin-bottom: 24px;
-  }
-
-  .badge-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: var(--wa);
-    display: inline-block;
-  }
-
-  h1 {
-    font-size: 38px; line-height: 1.12; font-weight: 800;
-    color: var(--ink); letter-spacing: -0.02em;
-    text-wrap: balance;
-    margin-bottom: 16px;
-  }
-
-  .sub {
-    font-size: 17px; line-height: 1.55;
-    color: var(--ink-soft);
-    max-width: 420px;
-    margin: 0 auto 32px;
-    text-wrap: pretty;
-  }
-
-  /* ---------- CTA ---------- */
-
-  .cta-group {
-    display: flex; flex-direction: column; align-items: center; gap: 12px;
-  }
-
-  .cta {
-    display: inline-flex; align-items: center; justify-content: center; gap: 12px;
-    width: 100%; max-width: 400px;
-    background: linear-gradient(135deg, var(--wa), var(--wa-deep));
-    color: #fff;
-    font-family: inherit;
-    font-size: 19px; font-weight: 700;
-    padding: 20px 28px;
-    border: 0;
-    border-radius: 16px;
-    text-decoration: none;
-    cursor: pointer;
-    box-shadow: 0 12px 30px rgba(37,211,102,0.35);
-    animation: pulseWa 2.2s infinite;
-    transition: transform .15s ease, box-shadow .15s ease;
-  }
-
-  .cta:hover  { color: #fff; transform: translateY(-2px); }
-  .cta:active { transform: translateY(0) scale(.99); }
-
-  .cta:focus-visible {
-    outline: 3px solid var(--sun-deep);
-    outline-offset: 3px;
-  }
-
-  .cta svg { flex: none; }
-
-  .note {
-    font-size: 13px;
-    color: var(--ink-faint);
-    margin-top: 16px;
-    min-height: 20px;
-  }
-
-  .note.is-active { color: var(--sun-deep); font-weight: 600; }
-
-  .fallback {
-    font-size: 13px; font-weight: 600;
-    color: var(--ink-soft);
-    margin-top: 10px;
-    display: none;
-  }
-
-  .fallback.is-visible { display: block; animation: floatUp .35s ease both; }
-
-  /* ---------- trust row ---------- */
-
-  .trust {
-    display: flex; align-items: center; justify-content: center;
-    gap: 26px;
-    margin-top: 44px;
-    flex-wrap: wrap;
-  }
-
-  .stat-value { font-size: 24px; font-weight: 800; color: var(--ink); }
-
-  .stat-label {
-    font-size: 12px; font-weight: 600;
-    color: #8A7F86;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin-top: 2px;
-  }
-
-  /* ---------- footer ---------- */
-
-  .footer {
-    margin-top: auto;
-    padding-top: 40px;
-    font-size: 12px;
-    color: var(--ink-ghost);
-    text-align: center;
-    line-height: 1.7;
-  }
-
-  .footer a { color: var(--ink-faint); text-decoration: none; }
-  .footer a:hover { color: var(--sun-deep); text-decoration: underline; }
-
-  .footer .sep { opacity: .5; margin: 0 6px; }
-
-  /* ---------- motion ---------- */
-
-  @keyframes pulseWa {
-    0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.45); }
-    70%  { box-shadow: 0 0 0 18px rgba(37,211,102,0); }
-    100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
-  }
-
-  @keyframes floatUp {
-    from { opacity: 0; transform: translateY(14px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: .001ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: .001ms !important;
-    }
-  }
-
-  /* ---------- small screens ---------- */
-
-  @media (max-width: 420px) {
-    .trust { gap: 18px; }
-    .stat-value { font-size: 21px; }
-  }
-
-  @media (max-width: 380px) {
-    h1  { font-size: 32px; }
-    .sub { font-size: 16px; }
-    .cta { font-size: 17px; padding: 18px 22px; }
-    .trust { gap: 18px; }
-  }
-</style>
-
-<script src="config.js"></script>
-<!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '3026655424176084');
-fbq('track', 'PageView');
-
-// Subscribe — fired when the visitor taps the WhatsApp button
-document.addEventListener('click', function (e) {
-  if (e.target.closest && e.target.closest('#waCta')) {
-    fbq('track', 'Subscribe');
-  }
-});
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=3026655424176084&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
-<script src="https://meta-track-production.up.railway.app/site.js" data-site="d9j4xdj1l9" async></script>
-</head>
-
-<body>
-<div class="page">
-
-  <div class="shell topbar">
-    <div class="brand">
-      <div class="brand-mark" id="brandMark" aria-hidden="true">S</div>
-      <span class="brand-name" id="brandName">Surya Sports Media</span>
-    </div>
-    <span class="status-pill" id="onlineLabel">Online now</span>
-  </div>
-
-  <main class="shell hero">
-
-    <div class="badge">
-      <span class="badge-dot" aria-hidden="true"></span>
-      <span id="badge">Replies in minutes</span>
-    </div>
-
-    <h1 id="headline">Get more customers from your ads</h1>
-
-    <p class="sub" id="subheadline">
-      Tap the button below to chat with us directly. No forms, no waiting — just a quick message and we'll take it from there.
-    </p>
-
-    <div class="cta-group">
-      <a class="cta" id="waCta" href="#" rel="noopener nofollow" aria-label="Chat with us on WhatsApp">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true" focusable="false"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        <span id="waCtaLabel">Chat with us on WhatsApp</span>
-      </a>
-    </div>
-
-    <p class="note" id="note" role="status" aria-live="polite">Free consultation · No spam, ever</p>
-    <p class="fallback" id="fallback">Didn't open automatically? Tap the button above.</p>
-
-    <div class="trust" id="trust" hidden></div>
-
-  </main>
-
-  <footer class="footer">
-    <span id="footerNote">Chat with us on WhatsApp</span> ·
-    <span id="footerBrand">Surya Sports Media</span>
-    <br>
-    <a id="privacyLink" href="privacy.html">Privacy Policy</a>
-    <span class="sep">·</span>
-    <a id="termsLink" href="terms.html">Terms</a>
-  </footer>
-
-</div>
-
-<script src="app.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Surya Sports Media — Chat on WhatsApp</title>
+    <meta name="description" content="Message Surya Sports Media on WhatsApp for a free consultation. No forms, no waiting." />
+    <meta name="author" content="Surya Sports Media" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#fff1e4" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Surya Sports Media" />
+    <meta property="og:title" content="Surya Sports Media — Chat on WhatsApp" />
+    <meta property="og:description" content="Message Surya Sports Media on WhatsApp for a free consultation. No forms, no waiting." />
+    <meta property="og:image" content="/assets/og-image.png?v=2" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/assets/og-image.png?v=2" />
+
+    <link rel="icon" type="image/svg+xml" href="/assets/surya-mark.svg?v=2" />
+    <link rel="icon" type="image/png" href="/assets/favicon.png?v=2" />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png?v=2" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2250453805519185');
+    fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code (its <noscript> fallback is at the top of <body>) -->
+
+    <script src="https://meta-track-production.up.railway.app/site.js" data-site="d9j4xdj1l9" async></script>
+  </head>
+
+  <body>
+    <!-- Meta Pixel noscript fallback — must live in <body>: an <img> inside a
+         <noscript> in <head> is invalid HTML and Vite refuses to build it. -->
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=2250453805519185&ev=PageView&noscript=1"
+    /></noscript>
+
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

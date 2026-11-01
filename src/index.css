@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens — all colors are HSL. */
+@layer base {
+  :root {
+    --background: 28 100% 98%;
+    --foreground: 268 21% 11%;
+
+    --primary: 20 83% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-deep: 21 88% 40%;
+
+    --secondary: 26 100% 93%;
+    --secondary-foreground: 21 88% 40%;
+
+    --muted: 26 100% 96%;
+    --muted-foreground: 281 9% 34%;
+
+    --accent: 26 100% 93%;
+    --accent-foreground: 15 75% 28%;
+
+    --border: 26 100% 89%;
+    --input: 26 100% 89%;
+    --ring: 21 88% 40%;
+
+    --whatsapp: 142 70% 49%;
+    --whatsapp-deep: 150 77% 31%;
+
+    --radius: 1rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .bg-hero {
+    background: radial-gradient(1200px 600px at 50% -10%, #fff1e4 0%, #fff9f4 45%, #ffffff 100%);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
