@@ -54,6 +54,7 @@ button (`src/lib/tracking.ts`).
 
 It is a single-page app, so the host must serve `index.html` for every path.
 `vercel.json` (Vercel) and `public/_redirects` (Netlify) already do this.
+`netlify.toml` tells Netlify to run `npm run build` and publish `dist/`.
 The old `/privacy.html` and `/terms.html` links still work.
 
 ## License
